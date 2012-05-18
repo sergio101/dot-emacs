@@ -1,17 +1,28 @@
 
 ;; ----- smex-history -----
 (
+ magit-status
+ eval-buffer
  package-install
+ customize-group
  package-refresh-contents
- cd
- 5x5
- arp
- dbx
- dig
+ eshell
+ load-library
 )
 
 ;; ----- smex-data -----
 (
- (package-install . 5)
- (package-refresh-contents . 2)
+ (package-install . 11)
+ (package-refresh-contents . 4)
+ (load-theme . 5)
+ (eshell . 2)
+ (ensime-sbt . 2)
+ (erc . 1)
+ (menu-bar-showhide-fringe-ind-customize . 1)
+ (ensime . 2)
+ (customize-face . 2)
+ (load-library . 1)
+ (customize-group . 1)
+ (magit-status . 2)
+ (eval-buffer . 2)
 )
