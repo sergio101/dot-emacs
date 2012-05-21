@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- magit-pull
- magit-push
  magit-status
- eval-buffer
- package-install
- emacs-lisp-mode
- eshell
+ auto-complete-mode
+ ac-complete-words-in-buffer
+ magit-push
+ magit-pull
+ list-tags
+ tags-search
 )
 
 ;; ----- smex-data -----
@@ -17,18 +17,25 @@
  (load-theme . 5)
  (eshell . 5)
  (ensime-sbt . 2)
- (erc . 1)
+ (erc . 2)
  (menu-bar-showhide-fringe-ind-customize . 1)
  (ensime . 2)
  (customize-face . 2)
  (load-library . 1)
  (customize-group . 1)
- (magit-status . 6)
+ (magit-status . 13)
  (eval-buffer . 3)
- (magit-push . 3)
+ (magit-push . 8)
  (load-file . 1)
  (emacs-lisp-mode . 1)
  (helm-mini . 1)
  (helm-mode . 1)
- (magit-pull . 1)
+ (magit-pull . 3)
+ (shell . 2)
+ (auto-complete . 2)
+ (magit-checkout . 2)
+ (tags-search . 1)
+ (list-tags . 1)
+ (ac-complete-words-in-buffer . 1)
+ (auto-complete-mode . 1)
 )

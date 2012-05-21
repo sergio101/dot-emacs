@@ -1,4 +1,10 @@
 ;-*-Lisp-*-
+
+;; change the size of the window
+(setq default-frame-alist '(
+                (width . 140)
+                (height . 55) ))
+
 (add-to-list 'load-path "~/elisp/scala-emacs")
 (require 'scala-mode-auto)
 
@@ -14,7 +20,6 @@
 (add-to-list 'load-path "~/elisp/scala-emacs")
 (add-to-list 'load-path "~/elisp/php-mode")
 (require 'php-mode)
-
 
 ;; This step causes the ensime-mode to be started whenever
 ;; scala-mode is started for a buffer. You may have to customize this step
