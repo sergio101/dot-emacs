@@ -1,21 +1,21 @@
 
 ;; ----- smex-history -----
 (
- magit-status
+ find-file-in-project
+ customize
  auto-complete-mode
- ac-complete-words-in-buffer
- magit-push
- magit-pull
- list-tags
- tags-search
+ shell
+ eshell
+ magit-status
+ apropos
 )
 
 ;; ----- smex-data -----
 (
- (package-install . 13)
+ (package-install . 14)
  (package-refresh-contents . 4)
  (load-theme . 5)
- (eshell . 5)
+ (eshell . 6)
  (ensime-sbt . 2)
  (erc . 2)
  (menu-bar-showhide-fringe-ind-customize . 1)
@@ -23,7 +23,7 @@
  (customize-face . 2)
  (load-library . 1)
  (customize-group . 1)
- (magit-status . 13)
+ (magit-status . 14)
  (eval-buffer . 3)
  (magit-push . 8)
  (load-file . 1)
@@ -31,11 +31,14 @@
  (helm-mini . 1)
  (helm-mode . 1)
  (magit-pull . 3)
- (shell . 2)
+ (shell . 3)
  (auto-complete . 2)
  (magit-checkout . 2)
  (tags-search . 1)
  (list-tags . 1)
  (ac-complete-words-in-buffer . 1)
- (auto-complete-mode . 1)
+ (auto-complete-mode . 3)
+ (apropos . 1)
+ (find-file-in-project . 6)
+ (customize . 1)
 )

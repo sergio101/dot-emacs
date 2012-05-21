@@ -29,6 +29,11 @@
 (add-to-list 'load-path "~/elisp/helm")
 (require 'helm-config)
 
+;; turn on auto complete mode
+(auto-complete-mode (quote toggle))
+
+(global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
