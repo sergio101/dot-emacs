@@ -1,21 +1,21 @@
 
 ;; ----- smex-history -----
 (
+ magit-pull
+ magit-push
  magit-status
  eval-buffer
  package-install
- customize-group
- package-refresh-contents
+ emacs-lisp-mode
  eshell
- load-library
 )
 
 ;; ----- smex-data -----
 (
- (package-install . 11)
+ (package-install . 13)
  (package-refresh-contents . 4)
  (load-theme . 5)
- (eshell . 2)
+ (eshell . 5)
  (ensime-sbt . 2)
  (erc . 1)
  (menu-bar-showhide-fringe-ind-customize . 1)
@@ -23,6 +23,12 @@
  (customize-face . 2)
  (load-library . 1)
  (customize-group . 1)
- (magit-status . 2)
- (eval-buffer . 2)
+ (magit-status . 6)
+ (eval-buffer . 3)
+ (magit-push . 3)
+ (load-file . 1)
+ (emacs-lisp-mode . 1)
+ (helm-mini . 1)
+ (helm-mode . 1)
+ (magit-pull . 1)
 )
