@@ -9,7 +9,7 @@
 ;; Git: git://github.com/technomancy/find-file-in-project.git
 ;; Version: 3.0
 ;; Created: 2008-03-18
-;; Keywords: project, convenience
+;; Keywords: project, conveniencge
 ;; EmacsWiki: FindFileInProject
 
 ;; This file is NOT part of GNU Emacs.
@@ -68,7 +68,7 @@ May be set using .dir-locals.el.")
 
 (defvar ffip-patterns
   '("*.html" "*.org" "*.txt" "*.md" "*.el" "*.clj" "*.py" "*.rb" "*.js" "*.pl"
-    "*.sh" "*.erl" "*.hs" "*.ml")
+    "*.sh" "*.erl" "*.hs" "*.ml" "*.php" "*.ctp")
   "List of patterns to look for with `find-file-in-project'.")
 
 (defvar ffip-find-options ""
