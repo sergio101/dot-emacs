@@ -1,4 +1,10 @@
 ;-*-Lisp-*-
+
+;; change the size of the window
+(setq default-frame-alist '(
+                (width . 140)
+                (height . 55) ))
+
 (add-to-list 'load-path "~/elisp/scala-emacs")
 (require 'scala-mode-auto)
 
@@ -31,6 +37,27 @@
 (add-to-list 'load-path "~/elisp/ledger")
 (require 'ledger)
 
+;; turn on auto complete mode
+(auto-complete-mode t)
+
+;; turn on truncate long lines
+(toggle-truncate-lines t)
+
+(global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
+
+;; set up the mysql binary - this is for MAMP
+(setq sql-mysql-program "/usr/local/bin/mysql")
+
+;; set up textmate mode
+(add-to-list 'load-path "~/elisp/textmate.el")
+(require 'textmate)
+(textmate-mode)
+
+;; set up yasnippet
+(add-to-list 'load-path
+              "~/elisp/yasnippet")
+(require 'yasnippet)
+(yas/global-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -44,4 +71,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "Monaco")))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Monaco")))))
