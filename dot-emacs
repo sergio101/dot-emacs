@@ -1,5 +1,16 @@
 ;-*-Lisp-*-
 
+;; set up CEDET
+(load-file "~/elisp/cedet-1.1/common/cedet.el")
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+(global-srecode-minor-mode 1)            ; Enable template insertion
+                                        ; menu
+
+;; set up ECB
+(add-to-list 'load-path "~/elisp/ecb-2.40")
+(require 'ecb)
+
 ;; change the size of the window
 (setq default-frame-alist '(
                 (width . 140)
@@ -87,6 +98,11 @@
 (add-to-list 'load-path "~/elisp/rspec-mode")
 (require 'rspec-mode)
 
+;; set up ispell
+(setq ispell-program-name "/usr/local/bin/ispell")
+
+
+
 (defun insert-before-line ()
   (interactive)
   (let ((pos (point))
@@ -110,6 +126,7 @@
  '(custom-safe-themes (quote ("baed08a10ff9393ce578c3ea3e8fd4f8c86e595463a882c55f3bd617df7e5a45" default)))
  '(global-auto-complete-mode t)
  '(ido-enable-tramp-completion t)
+ '(nxhtml-autoload-web nil t)
  '(yas/snippet-dirs (quote ("/Users/sergio/elisp/yasnippet/snippets")) nil (yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
