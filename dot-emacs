@@ -33,6 +33,11 @@
 (add-to-list 'load-path "~/elisp/helm")
 (require 'helm-config)
 
+;; install twitter mode
+(add-to-list 'load-path "~/elisp/twittering-mode")
+(require 'twittering-mode)
+
+
 ;; install ledger mode
 (add-to-list 'load-path "~/elisp/ledger")
 (require 'ledger)
@@ -65,6 +70,36 @@
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
+
+;; includee maylon
+(add-to-list 'load-path "~/elisp/maylon")
+(require 'malyon)
+
+;; include rinari
+(add-to-list 'load-path "~/elisp/rinari")
+(require 'rinari)
+
+;; include rvm
+(add-to-list 'load-path "~/elisp/rvm.el")
+(require 'rvm)
+
+;; include rspec mode
+(add-to-list 'load-path "~/elisp/rspec-mode")
+(require 'rspec-mode)
+
+(defun insert-before-line ()
+  (interactive)
+  (let ((pos (point))
+        (cur-max (point-max)))
+    (beginning-of-line)
+    ; I've changed the order of (yank) and (indent-according-to-mode)
+    ; in order to handle the case when yanked line comes with its own indent
+    (yank)(indent-according-to-mode)
+    ; could be as well changed to simple (newline) it's metter of taste
+    ; and of usage
+    (newline-and-indent) 
+    (goto-char (+ pos (- (point-max) cur-max)))))
+
 
 
 (custom-set-variables
