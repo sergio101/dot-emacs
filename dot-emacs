@@ -1,6 +1,29 @@
 ;-*-Lisp-*-
 
 
+;; temporarily ditch rinari for rails mode
+;; include rinari
+;; (add-to-list 'load-path "~/elisp/rinari")
+;; (require 'rinari)
+
+;; set up org mode
+;; The following lines are always needed.  Choose your own keys.
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+
+;; install rails mode
+(add-to-list 'load-path (expand-file-name "~/elisp/emacs-rails"))
+;;(require 'rails)
+
+;; install rhtml mindor mode
+(add-to-list 'load-path "~/elisp/rhtml")
+(require 'rhtml-mode)
+
+
 ;; set up ECB
 (setq stack-trace-on-error t)
 (add-to-list 'load-path "~/elisp/ecb")
@@ -46,7 +69,6 @@
 (add-to-list 'load-path "~/elisp/twittering-mode")
 (require 'twittering-mode)
 
-
 ;; install ledger mode
 (add-to-list 'load-path "~/elisp/ledger")
 (require 'ledger)
@@ -84,9 +106,7 @@
 (add-to-list 'load-path "~/elisp/maylon")
 (require 'malyon)
 
-;; include rinari
-(add-to-list 'load-path "~/elisp/rinari")
-(require 'rinari)
+
 
 ;; include rvm
 (add-to-list 'load-path "~/elisp/rvm.el")
@@ -126,6 +146,7 @@
  '(global-auto-complete-mode t)
  '(ido-enable-tramp-completion t)
  '(nxhtml-autoload-web nil t)
+ '(org-agenda-files (quote ("~/Sites/hewee_git/project_docs/project.org")))
  '(yas/snippet-dirs (quote ("/Users/sergio/elisp/yasnippet/snippets")) nil (yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
