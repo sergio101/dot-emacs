@@ -14,6 +14,23 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+;; Set to the location of your Org files on your local system
+(setq org-directory "~/orgfiles")
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "~/orgfiles/flagged.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+
+;; set up org capture
+(setq org-default-notes-file (concat org-directory "~/orgiles/inbox.org"))
+(define-key global-map "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/orgfiles/inbox.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/orgfiles/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
 
 ;; install rails mode
 (add-to-list 'load-path (expand-file-name "~/elisp/emacs-rails"))
@@ -143,10 +160,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("baed08a10ff9393ce578c3ea3e8fd4f8c86e595463a882c55f3bd617df7e5a45" default)))
  '(ecb-options-version "2.40")
+ '(ecb-tip-of-the-day nil)
  '(global-auto-complete-mode t)
  '(ido-enable-tramp-completion t)
  '(nxhtml-autoload-web nil t)
- '(org-agenda-files (quote ("~/Sites/hewee_git/project_docs/project.org")))
+ '(org-agenda-files (quote ("~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
+ '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
  '(yas/snippet-dirs (quote ("/Users/sergio/elisp/yasnippet/snippets")) nil (yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
