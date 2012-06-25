@@ -123,6 +123,10 @@
 (add-to-list 'load-path "~/elisp/maylon")
 (require 'malyon)
 
+;; yaml mode
+(add-to-list 'load-path "~/elisp/yaml-mode")
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(require 'yaml-mode)
 
 
 ;; include rvm
