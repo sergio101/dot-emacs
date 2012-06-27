@@ -3,8 +3,8 @@
 
 ;; temporarily ditch rinari for rails mode
 ;; include rinari
-;; (add-to-list 'load-path "~/elisp/rinari")
-;; (require 'rinari)
+(add-to-list 'load-path "~/elisp/rinari")
+(require 'rinari)
 
 ;; set up org mode
 ;; The following lines are always needed.  Choose your own keys.
@@ -33,8 +33,9 @@
 
 
 ;; install rails mode
-(add-to-list 'load-path (expand-file-name "~/elisp/emacs-rails"))
-;;(require 'rails)
+;; (setq load-path (cons (expand-file-name "~/elisp/emacs-rails-reloaded") load-path))
+;; (require 'rails-autoload)
+
 
 ;; install rhtml mindor mode
 (add-to-list 'load-path "~/elisp/rhtml")
@@ -110,7 +111,8 @@
 (add-to-list 'load-path
               "~/elisp/yasnippet")
 (require 'yasnippet)
-(yas/global-mode 1)
+(yas/initialize)
+(yas/load-directory "~/elisp/yasnippet/snippets")
 
 ;; remove ^M eol from file
 (defun remove-dos-eol ()
@@ -119,7 +121,7 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
-;; includee maylon
+;; include maylon
 (add-to-list 'load-path "~/elisp/maylon")
 (require 'malyon)
 
@@ -170,7 +172,7 @@
  '(nxhtml-autoload-web nil t)
  '(org-agenda-files (quote ("~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
  '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
- '(yas/snippet-dirs (quote ("/Users/sergio/elisp/yasnippet/snippets")) nil (yasnippet)))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
