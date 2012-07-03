@@ -36,10 +36,10 @@
 ;; (setq load-path (cons (expand-file-name "~/elisp/emacs-rails-reloaded") load-path))
 ;; (require 'rails-autoload)
 
-
+;; this mode was driving yansippets  crazy..
 ;; install rhtml mindor mode
-(add-to-list 'load-path "~/elisp/rhtml")
-(require 'rhtml-mode)
+;;(add-to-list 'load-path "~/elisp/rhtml")
+;;(require 'rhtml-mode)
 
 
 ;; set up ECB
@@ -111,8 +111,13 @@
 (add-to-list 'load-path
               "~/elisp/yasnippet")
 (require 'yasnippet)
+(setq yas/snippet-dirs '("~/elisp/yasnippet/snippets" ))
 (yas/initialize)
-(yas/load-directory "~/elisp/yasnippet/snippets")
+(yas/load-directory
+ (concat (file-name-directory (or load-file-name buffer-file-name))
+	 "rails-snippets/"))
+(yas/global-mode 1)
+
 
 ;; remove ^M eol from file
 (defun remove-dos-eol ()
@@ -172,7 +177,7 @@
  '(nxhtml-autoload-web nil t)
  '(org-agenda-files (quote ("~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
  '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
- )
+ '(yas/snippet-dirs "~/elisp/yasnippet/snippets/" nil (yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
