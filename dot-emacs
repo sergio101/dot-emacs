@@ -38,8 +38,8 @@
 
 ;; this mode was driving yansippets  crazy..
 ;; install rhtml mindor mode
-;;(add-to-list 'load-path "~/elisp/rhtml")
-;;(require 'rhtml-mode)
+;; (add-to-list 'load-path "~/elisp/rhtml")
+;; (require 'rhtml-mode)
 
 
 ;; set up ECB
@@ -115,7 +115,7 @@
 (yas/initialize)
 (yas/load-directory
  (concat (file-name-directory (or load-file-name buffer-file-name))
-	 "rails-snippets/"))
+	 "elisp/yasnippets-rails/rails-snippets/"))
 (yas/global-mode 1)
 
 
@@ -177,6 +177,7 @@
  '(nxhtml-autoload-web nil t)
  '(org-agenda-files (quote ("~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
  '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
+ '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(yas/snippet-dirs "~/elisp/yasnippet/snippets/" nil (yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
