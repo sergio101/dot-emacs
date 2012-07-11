@@ -97,6 +97,9 @@
 ;; turn on truncate long lines
 (toggle-truncate-lines t)
 
+;; turn on highlight current line
+(global-hl-line-mode 1)
+
 (global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
 
 ;; set up the mysql binary - this is for MAMP
@@ -113,9 +116,7 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs '("~/elisp/yasnippet/snippets" ))
 (yas/initialize)
-(yas/load-directory
- (concat (file-name-directory (or load-file-name buffer-file-name))
-	 "elisp/yasnippets-rails/rails-snippets/"))
+(yas/load-directory "~/elisp/yasnippets-rails/rails-snippets/")
 (yas/global-mode 1)
 
 
