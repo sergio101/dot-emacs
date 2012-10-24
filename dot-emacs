@@ -1,23 +1,6 @@
 ;-*-Lisp-*-
 
 
-;; temporarily ditch rinari for rails mode
-;; include rinari
-(add-to-list 'load-path "~/elisp/rinari")
-(require 'rinari)
-
-(add-to-list 'load-path "~/elisp/ensime/src/main/elisp")
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
-;; set up binary path
- ;; (setenv "PATH"
- ;;     (concat (getenv "PATH")
- ;; ":/usr/textbin:/usr/local/bin"))
- ;; (setq exec-path (append exec-path
- ;;     '("/usr/local/bin" 
- ;; "/usr/textbin")))
-
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -63,15 +46,6 @@
                "\\documentclass{article}"
                ("\\section{%s}" . "\\section*{%s}")))
 
-;; install rails mode
-;; (setq load-path (cons (expand-file-name "~/elisp/emacs-rails-reloaded") load-path))
-;; (require 'rails-autoload)
-
-;; this mode was driving yansippets  crazy..
-;; install rhtml mindor mode
-;; (add-to-list 'load-path "~/elisp/rhtml")
-;; (require 'rhtml-mode)
-
 
 ;; set up ECB
 (setq stack-trace-on-error t)
@@ -86,20 +60,6 @@
                 (width . 140)
                 (height . 55) ))
 
-(add-to-list 'load-path "~/elisp/scala-emacs")
-(require 'scala-mode-auto)
-
-(add-hook 'scala-mode-hook
-            '(lambda ()
-	       (scala-mode-feature-electric-mode)
-               ))
-
-;; load the ensime lisp code...
-
-(add-to-list 'load-path "~/elisp/ensime/src/main/elisp/")
-(require 'ensime)
-
-(add-to-list 'load-path "~/elisp/scala-emacs")
 (add-to-list 'load-path "~/elisp/php-mode")
 (require 'php-mode)
 
@@ -107,10 +67,6 @@
                 (width . 150)
                 (height . 40) ))
 
-;; This step causes the ensime-mode to be started whenever
-;; scala-mode is started for a buffer. You may have to customize this step
-;; if you're not using the standard scala mode.
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 (add-to-list 'load-path "~/elisp/helm")
 (require 'helm-config)
@@ -134,8 +90,6 @@
 
 (global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
 
-;; set up the mysql binary - this is for MAMP
-(setq sql-mysql-program "/usr/local/bin/mysql")
 
 ;; set up textmate mode
 (add-to-list 'load-path "~/elisp/textmate.el")
@@ -180,8 +134,6 @@
 ;; set up ispell
 (setq ispell-program-name "/usr/local/bin/ispell")
 
-
-
 (defun insert-before-line ()
   (interactive)
   (let ((pos (point))
@@ -195,7 +147,20 @@
     (newline-and-indent) 
     (goto-char (+ pos (- (point-max) cur-max)))))
 
-
+;; automatically save buffers associated with files on buffer switch
+;; and on windows switch
+(defadvice switch-to-buffer (before save-buffer-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice other-window (before other-window-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice windmove-up (before other-window-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice windmove-down (before other-window-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice windmove-left (before other-window-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice windmove-right (before other-window-now activate)
+  (when buffer-file-name (save-buffer)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -208,7 +173,7 @@
  '(global-auto-complete-mode t)
  '(ido-enable-tramp-completion t)
  '(nxhtml-autoload-web nil t)
- '(org-agenda-files (quote ("~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
+ '(org-agenda-files (quote ("~/orgfiles/Hewee.org" "~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
  '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(yas/snippet-dirs "~/elisp/yasnippet/snippets/" nil (yasnippet)))
@@ -217,4 +182,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "Monaco")))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "Source Code Pro")))))
