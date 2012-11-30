@@ -1,8 +1,5 @@
 ;-*-Lisp-*-
 
-<<<<<<< HEAD
-
-=======
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -11,7 +8,7 @@
 ;; Load RHTML mode
 (add-to-list 'load-path "~/elisp/rhtml")
 (require 'rhtml-mode)
->>>>>>> older
+
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -82,7 +79,7 @@
 (add-to-list 'load-path "~/elisp/helm")
 (require 'helm-config)
 ;; turn on auto complete mode
-(auto-complete-mode t)
+;; (auto-complete-mode t)
 
 ;; install twitter mode
 (add-to-list 'load-path "~/elisp/twittering-mode")
