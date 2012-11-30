@@ -1,6 +1,13 @@
 ;-*-Lisp-*-
 
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(package-initialize)
 
+;; Load RHTML mode
+(add-to-list 'load-path "~/elisp/rhtml")
+(require 'rhtml-mode)
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -110,10 +117,21 @@
 ;; set up the mysql binary - this is for MAMP
 (setq sql-mysql-program "/usr/local/bin/mysql")
 
-;; set up textmate mode
-(add-to-list 'load-path "~/elisp/textmate.el")
-(require 'textmate)
-(textmate-mode)
+(add-to-list 'load-path "~/elisp/emacs-rails")
+(require 'rails)
+
+;; set up line numbers on for source code files
+(add-hook 'abg-code-modes-hook
+          (lambda () (linum-mode 1)))
+
+(add-hook 'ruby-mode-hook
+          (lambda () (run-hooks 'abg-code-modes-hook)))
+
+;;set up spaces for haml mode
+     (add-hook 'haml-mode-hook
+               (lambda ()
+                 (setq indent-tabs-mode nil)
+                 (define-key haml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; set up yasnippet
 (add-to-list 'load-path
