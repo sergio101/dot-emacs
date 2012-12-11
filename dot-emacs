@@ -79,7 +79,8 @@
 (add-to-list 'load-path "~/elisp/helm")
 (require 'helm-config)
 ;; turn on auto complete mode
-;; (auto-complete-mode t)
+(auto-complete-mode t)
+
 
 ;; install twitter mode
 (add-to-list 'load-path "~/elisp/twittering-mode")
