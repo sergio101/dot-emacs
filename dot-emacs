@@ -5,6 +5,17 @@
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
+(defun set-tab-width (width)
+  (interactive "nSet tab width: ")
+  (setq tab-width width))
+
+
+;; auto complete mode
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(ac-config-default)
+
 ;; Load RHTML mode
 (add-to-list 'load-path "~/elisp/rhtml")
 (require 'rhtml-mode)
@@ -60,6 +71,10 @@
 (add-to-list 'load-path "~/elisp/ecb")
 (require 'ecb)
 
+;; set up ruby electric
+(add-to-list 'load-path "~/elisp/ruby-electric")
+(require 'ruby-electric)
+
 ;; turn on the windmove keybindings
 (windmove-default-keybindings)
 
@@ -74,12 +89,6 @@
 (setq default-frame-alist '(
                 (width . 150)
                 (height . 40) ))
-
-
-(add-to-list 'load-path "~/elisp/helm")
-(require 'helm-config)
-;; turn on auto complete mode
-(auto-complete-mode t)
 
 
 ;; install twitter mode
