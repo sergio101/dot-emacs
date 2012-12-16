@@ -1,10 +1,11 @@
 ;-*-Lisp-*-
 
 
-;; temporarily ditch rinari for rails mode
 ;; include rinari
-(add-to-list 'load-path "~/elisp/rinari")
-(require 'rinari)
+;;(add-to-list 'load-path "~/elisp/rinari")
+;;(require 'rinari)
+
+
 
 ;; set up org mode
 ;; The following lines are always needed.  Choose your own keys.
@@ -90,6 +91,8 @@
 ;; install ledger mode
 (add-to-list 'load-path "~/elisp/ledger")
 (require 'ledger)
+(custom-set-variables
+ '(ledger-binary-path "/usr/local/bin/ledger"))
 
 ;; turn on auto complete mode
 (auto-complete-mode t)
@@ -113,9 +116,6 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs '("~/elisp/yasnippet/snippets" ))
 (yas/initialize)
-(yas/load-directory
- (concat (file-name-directory (or load-file-name buffer-file-name))
-	 "rails-snippets/"))
 (yas/global-mode 1)
 
 
@@ -174,6 +174,7 @@
  '(ecb-tip-of-the-day nil)
  '(global-auto-complete-mode t)
  '(ido-enable-tramp-completion t)
+ '(magit-git-executable "/usr/local/bin/git")
  '(nxhtml-autoload-web nil t)
  '(org-agenda-files (quote ("~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
  '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
@@ -181,6 +182,6 @@
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
+ ;; Your init filee should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Monaco")))))
