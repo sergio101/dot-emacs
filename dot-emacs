@@ -150,7 +150,6 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs '("~/elisp/yasnippet/snippets" ))
 (yas/initialize)
-(yas/load-directory "~/elisp/yasnippets-rails/rails-snippets/")
 (yas/global-mode 1)
 
 
