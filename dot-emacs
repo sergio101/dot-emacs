@@ -9,8 +9,8 @@
   (interactive "nSet tab width: ")
   (setq tab-width width))
 
-(add-to-list 'load-path "~/elisp/rails-test")
-(require 'rails-test)
+(add-to-list 'load-path "~/elisp/ruby-test")
+(require 'ruby-test)
 
 ;; There's something similar (but fancier) in vc-git.el: vc-git-grep
 ;; -I means don't search through binary files
