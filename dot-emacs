@@ -117,7 +117,23 @@
 (add-to-list 'load-path "~/elisp/ledger")
 (require 'ledger)
 (custom-set-variables
- '(ledger-binary-path "/usr/local/bin/ledger"))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("baed08a10ff9393ce578c3ea3e8fd4f8c86e595463a882c55f3bd617df7e5a45" default)))
+ '(ecb-options-version "2.40")
+ '(ecb-tip-of-the-day nil)
+ '(global-auto-complete-mode t)
+ '(haml-indent-offset 3)
+ '(ido-enable-tramp-completion t)
+ '(ledger-binary-path "/usr/local/bin/ledger")
+ '(magit-git-executable "/usr/local/bin/git")
+ '(nxhtml-autoload-web nil t)
+ '(org-agenda-files (quote ("~/orgfiles/Hewee.org" "~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
+ '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
+ '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
+ '(yas/snippet-dirs "~/elisp/yasnippet/snippets/" nil (yasnippet)))
 
 ;; turn on truncate long lines
 (toggle-truncate-lines t)
@@ -142,12 +158,14 @@
      (add-hook 'haml-mode-hook
                (lambda ()
                  (setq indent-tabs-mode nil)
+                 (run-hooks 'abg-code-modes-hook)
                  (define-key haml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; set up yasnippet
 (add-to-list 'load-path
               "~/elisp/yasnippet")
 (require 'yasnippet)
+
 (setq yas/snippet-dirs '("~/elisp/yasnippet/snippets" ))
 (yas/initialize)
 (yas/global-mode 1)
@@ -208,25 +226,10 @@
 (defadvice windmove-right (before other-window-now activate)
   (when buffer-file-name (save-buffer)))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("baed08a10ff9393ce578c3ea3e8fd4f8c86e595463a882c55f3bd617df7e5a45" default)))
- '(ecb-options-version "2.40")
- '(ecb-tip-of-the-day nil)
- '(global-auto-complete-mode t)
- '(ido-enable-tramp-completion t)
- '(magit-git-executable "/usr/local/bin/git")
- '(nxhtml-autoload-web nil t)
- '(org-agenda-files (quote ("~/orgfiles/Hewee.org" "~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
- '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
- '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
- '(yas/snippet-dirs "~/elisp/yasnippet/snippets/" nil (yasnippet)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init filee should contain only one such instance.
+ ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "Source Code Pro")))))
