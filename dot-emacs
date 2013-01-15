@@ -12,6 +12,13 @@
 (add-to-list 'load-path "~/elisp/ruby-test")
 (require 'ruby-test)
 
+;; set up buf-move
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+
 ;; There's something similar (but fancier) in vc-git.el: vc-git-grep
 ;; -I means don't search through binary files
 (defcustom git-grep-switches "--extended-regexp -I -n --ignore-case"
@@ -133,7 +140,7 @@
  '(org-agenda-files (quote ("~/orgfiles/Hewee.org" "~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
  '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
- '(yas/snippet-dirs "~/elisp/yasnippet/snippets/" nil (yasnippet)))
+ '(yas/wrap-around-region t))
 
 ;; turn on truncate long lines
 (toggle-truncate-lines t)
@@ -160,15 +167,6 @@
                  (setq indent-tabs-mode nil)
                  (run-hooks 'abg-code-modes-hook)
                  (define-key haml-mode-map "\C-m" 'newline-and-indent)))
-
-;; set up yasnippet
-(add-to-list 'load-path
-              "~/elisp/yasnippet")
-(require 'yasnippet)
-
-(setq yas/snippet-dirs '("~/elisp/yasnippet/snippets" ))
-(yas/initialize)
-(yas/global-mode 1)
 
 
 ;; remove ^M eol from file
