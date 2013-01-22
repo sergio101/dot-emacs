@@ -41,8 +41,31 @@
 (ac-config-default)
 
 ;; Load RHTML mode
-(add-to-list 'load-path "~/elisp/rhtml")
-(require 'rhtml-mode)
+;; (add-to-list 'load-path "~/elisp/rhtml")
+;; (require 'rhtml-mode)
+
+     ;;; nxml (HTML ERB template support)
+(load "~/elisp/nxhtml/autostart.el")
+
+(setq
+ nxhtml-global-minor-mode t
+ mumamo-chunk-coloring 'submode-colored
+ nxhtml-skip-welcome t
+ indent-region-mode t
+ rng-nxml-auto-validate-flag nil
+ nxml-degraded t)
+(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo))
+
+;; Mumamo is making emacs 23.3 freak out:
+(when (and (equal emacs-major-version 23)
+           (equal emacs-minor-version 3))
+  (eval-after-load "bytecomp"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function))
+  ;; tramp-compat.el clobbers this variable!
+  (eval-after-load "tramp-compat"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function)))
 
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
@@ -156,9 +179,16 @@
 
 ;; set up line numbers on for source code files
 (add-hook 'abg-code-modes-hook
-          (lambda () (linum-mode 1)))
-
+          (lambda () (linum-mode 1))
+          (lambda () (auto-fill-mode 0)))
 (add-hook 'ruby-mode-hook
+          (lambda () (run-hooks 'abg-code-modes-hook)))
+
+
+(add-hook 'javascript-mode-hook
+          (lambda () (run-hooks 'abg-code-modes-hook)))
+
+(add-hook 'nxhtml-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))
 
 ;;set up spaces for haml mode
