@@ -53,15 +53,18 @@
  nxhtml-skip-welcome t
  indent-region-mode t
  rng-nxml-auto-validate-flag nil
- nxml-degraded t)
-(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo))
+ nxml-degraded t)(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo))
 
-;; Mumamo is making emacs 23.3 freak out:
-(when (and (equal emacs-major-version 23)
-           (equal emacs-minor-version 3))
+;; Mumamo is making emacs 24.0 freak out:
+(when (and (equal emacs-major-version 24)
+           (equal emacs-minor-version 0))
   (eval-after-load "bytecomp"
     '(add-to-list 'byte-compile-not-obsolete-vars
                   'font-lock-beginning-of-syntax-function))
+  (eval-after-load "bytecomp"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-syntactic-keywords))
+  
   ;; tramp-compat.el clobbers this variable!
   (eval-after-load "tramp-compat"
     '(add-to-list 'byte-compile-not-obsolete-vars
@@ -225,6 +228,10 @@
 
 ;; set up ispell
 (setq ispell-program-name "/usr/local/bin/ispell")
+
+;; set up buffer move
+(add-to-list 'load-path "~/elisp/buffer-move")
+(require 'buffer-move)
 
 (defun insert-before-line ()
   (interactive)
