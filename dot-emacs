@@ -35,6 +35,9 @@
 ;; turn on highlight current line
 (global-hl-line-mode 1)
 
+;; magit status
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; set up line numbers on for source code files
 (add-hook 'abg-code-modes-hook
           (lambda () (linum-mode 1))
