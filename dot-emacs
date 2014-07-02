@@ -1,16 +1,15 @@
 ;-*-Lisp-*-
 
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
-
+(require 'cask "/usr/local/Cellar/cask/0.7.0/cask.el")
+(cask-initialize)
+(require 'pallet)
+(load-theme 'solarized-light t)
+(projectile-global-mode)
+    (require 'ido)
+    (ido-mode t)
 (defun set-tab-width (width)
   (interactive "nSet tab width: ")
   (setq tab-width width))
-
-(add-to-list 'load-path "~/elisp/ruby-test")
-(require 'ruby-test)
 
 ;; set up buf-move
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
@@ -19,166 +18,17 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 
-;; There's something similar (but fancier) in vc-git.el: vc-git-grep
-;; -I means don't search through binary files
-(defcustom git-grep-switches "--extended-regexp -I -n --ignore-case"
-  "Switches to pass to `git grep'."
-  :type 'string)
-
-(defun git-grep (command-args)
-  (interactive
-   (list (read-shell-command "Run git-grep (like this): "
-                             (format "git grep %s -e "
-                                     git-grep-switches)
-                             'git-grep-history)))
-  (let ((grep-use-null-device nil))
-    (grep command-args)))
-
 ;; auto complete mode
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.3.1/elpa/auto-complete-20140618.2217/dict")
 (ac-config-default)
-
-;; Load RHTML mode
-;; (add-to-list 'load-path "~/elisp/rhtml")
-;; (require 'rhtml-mode)
-
-     ;;; nxml (HTML ERB template support)
-(load "~/elisp/nxhtml/autostart.el")
-
-(setq
- nxhtml-global-minor-mode t
- mumamo-chunk-coloring 'submode-colored
- nxhtml-skip-welcome t
- indent-region-mode t
- rng-nxml-auto-validate-flag nil
- nxml-degraded t)(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo))
-
-;; Mumamo is making emacs 24.0 freak out:
-(when (and (equal emacs-major-version 24)
-           (equal emacs-minor-version 0))
-  (eval-after-load "bytecomp"
-    '(add-to-list 'byte-compile-not-obsolete-vars
-                  'font-lock-beginning-of-syntax-function))
-  (eval-after-load "bytecomp"
-    '(add-to-list 'byte-compile-not-obsolete-vars
-                  'font-lock-syntactic-keywords))
-  
-  ;; tramp-compat.el clobbers this variable!
-  (eval-after-load "tramp-compat"
-    '(add-to-list 'byte-compile-not-obsolete-vars
-                  'font-lock-beginning-of-syntax-function)))
-
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(if window-system (set-exec-path-from-shell-PATH))
-
-
-
-;; set up org mode
-;; The following lines are always needed.  Choose your own keys.
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-
-;; Set to the location of your Org files on your local system
-(setq org-directory "~/orgfiles")
-;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull "~/orgfiles/flagged.org")
-;; Set to <your Dropbox root directory>/MobileOrg.
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
-
-;; set up org capture
-(setq org-default-notes-file (concat org-directory "~/orgiles/inbox.org"))
-(define-key global-map "\C-cc" 'org-capture)
-
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/orgfiles/inbox.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
-        ("j" "Journal" entry (file+datetree "~/orgfiles/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
-
-;; set up latex
-(require 'org-latex)
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-             '("article"
-               "\\documentclass{article}"
-               ("\\section{%s}" . "\\section*{%s}")))
-
-
-;; set up ECB
-(setq stack-trace-on-error t)
-(add-to-list 'load-path "~/elisp/ecb")
-(require 'ecb)
-
-;; set up ruby electric
-(add-to-list 'load-path "~/elisp/ruby-electric")
-(require 'ruby-electric)
-
-;; turn on the windmove keybindings
-(windmove-default-keybindings)
-
-;; change the size of the window
-(setq default-frame-alist '(
-                (width . 140)
-                (height . 55) ))
-
-(add-to-list 'load-path "~/elisp/php-mode")
-(require 'php-mode)
-
-(setq default-frame-alist '(
-                (width . 150)
-                (height . 40) ))
-
-
-;; install twitter mode
-(add-to-list 'load-path "~/elisp/twittering-mode")
-(require 'twittering-mode)
-
-;; install ledger mode
-(add-to-list 'load-path "~/elisp/ledger")
-(require 'ledger)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("baed08a10ff9393ce578c3ea3e8fd4f8c86e595463a882c55f3bd617df7e5a45" default)))
- '(ecb-options-version "2.40")
- '(ecb-tip-of-the-day nil)
- '(global-auto-complete-mode t)
- '(haml-indent-offset 3)
- '(ido-enable-tramp-completion t)
- '(ledger-binary-path "/usr/local/bin/ledger")
- '(magit-git-executable "/usr/local/bin/git")
- '(nxhtml-autoload-web nil t)
- '(org-agenda-files (quote ("~/orgfiles/Hewee.org" "~/orgfiles/DisturbedGirl.org" "~/orgfiles/Projects.org" "~/orgfiles/inbox.org")))
- '(org-refile-targets (quote ((org-agenda-files :tag . "\"Tasks\""))))
- '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
- '(yas/wrap-around-region t))
 
 ;; turn on truncate long lines
 (toggle-truncate-lines t)
 
 ;; turn on highlight current line
 (global-hl-line-mode 1)
-
-(global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
-
-
-(add-to-list 'load-path "~/elisp/emacs-rails")
-(require 'rails)
 
 ;; set up line numbers on for source code files
 (add-hook 'abg-code-modes-hook
@@ -194,57 +44,8 @@
 (add-hook 'nxhtml-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))
 
-;;set up spaces for haml mode
-     (add-hook 'haml-mode-hook
-               (lambda ()
-                 (setq indent-tabs-mode nil)
-                 (run-hooks 'abg-code-modes-hook)
-                 (define-key haml-mode-map "\C-m" 'newline-and-indent)))
-
-
-;; remove ^M eol from file
-(defun remove-dos-eol ()
-  "Do not show ^M in files containing mixed UNIX and DOS line endings."
-  (interactive)
-  (setq buffer-display-table (make-display-table))
-  (aset buffer-display-table ?\^M []))
-
-;; include maylon
-(add-to-list 'load-path "~/elisp/maylon")
-(require 'malyon)
-
-;; yaml mode
-(add-to-list 'load-path "~/elisp/yaml-mode")
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-(require 'yaml-mode)
-
-;; include rvm
-(add-to-list 'load-path "~/elisp/rvm.el")
-(require 'rvm)
-
-;; include rspec mode
-(add-to-list 'load-path "~/elisp/rspec-mode")
-(require 'rspec-mode)
-
 ;; set up ispell
 (setq ispell-program-name "/usr/local/bin/ispell")
-
-;; set up buffer move
-(add-to-list 'load-path "~/elisp/buffer-move")
-(require 'buffer-move)
-
-(defun insert-before-line ()
-  (interactive)
-  (let ((pos (point))
-        (cur-max (point-max)))
-    (beginning-of-line)
-    ; I've changed the order of (yank) and (indent-according-to-mode)
-    ; in order to handle the case when yanked line comes with its own indent
-    (yank)(indent-according-to-mode)
-    ; could be as well changed to simple (newline) it's metter of taste
-    ; and of usage
-    (newline-and-indent) 
-    (goto-char (+ pos (- (point-max) cur-max)))))
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
@@ -261,10 +62,9 @@
 (defadvice windmove-right (before other-window-now activate)
   (when buffer-file-name (save-buffer)))
 
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "Source Code Pro")))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "apple" :family "Source Code Pro")))))

@@ -11,3 +11,6 @@
 /rhtml-minor-mode/
 /.org-id-locations
 /url/cookies
+/.cask
+*.*#
+projectile-bookmarks.eld
