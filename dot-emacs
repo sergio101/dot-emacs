@@ -23,7 +23,12 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.3.1/elpa/auto-complete-20140618.2217/dict")
 (ac-config-default)
+(add-to-list 'ac-modes 'enh-ruby-mode)
 
+;windmore
+(require 'windmove)
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
 ;; turn on truncate long lines
 (toggle-truncate-lines t)
 
