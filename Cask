@@ -2,6 +2,8 @@
 
 (depends-on "ag")
 (depends-on "auto-complete")
+(depends-on "auto-complete-exuberant-ctags")
+(depends-on "buffer-move")
 (depends-on "cask")
 (depends-on "ctags")
 (depends-on "dash")
