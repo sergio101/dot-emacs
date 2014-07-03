@@ -23,6 +23,7 @@
 (depends-on "rvm")
 (depends-on "s")
 (depends-on "shut-up")
+(depends-on "slim-mode")
 (depends-on "smartparens")
 (depends-on "solarized-theme")
 (depends-on "twittering-mode")
