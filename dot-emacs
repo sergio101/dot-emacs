@@ -17,13 +17,17 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas-global-mode 1)
+
 
 ;; auto complete mode
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.3.1/elpa/auto-complete-20140618.2217/dict")
 (ac-config-default)
-(add-to-list 'ac-modes 'enh-ruby-mode)
+(add-to-list 'ac-modes 'enh-ruby-mode
+(add-to-list 'ac-modes 'haml-mode)
 
 ;windmore
 (require 'windmove)
