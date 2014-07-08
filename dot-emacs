@@ -3,6 +3,8 @@
 (require 'cask "/usr/local/Cellar/cask/0.7.0/cask.el")
 (cask-initialize)
 (require 'pallet)
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (load-theme 'solarized-light t)
 (projectile-global-mode)
     (require 'ido)
@@ -10,6 +12,11 @@
 (defun set-tab-width (width)
   (interactive "nSet tab width: ")
   (setq tab-width width))
+
+(require 'org-gcal)
+(setq org-gcal-client-id "1057237893562-iq24bqiease9336c66kfj451sg5sm9i5.apps.googleusercontent.com"
+      org-gcal-client-secret "jbqgULmrW5Sidy0tJwuaCqFg"
+      org-gcal-file-alist '(("sergio.rrd@gmail.com" .  "~/Dropbox/orgfiles/calendar.org")))
 
 ;; set up buf-move
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
@@ -22,6 +29,14 @@
 
 (require 'rvm)
 
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+(define-key global-map "\C-cc" 'org-capture)
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(add-hook 'org-mode-hook 'turn-on-font-lock)
 
 ;; auto complete mode
 (add-to-list 'load-path "~/.emacs.d/")
@@ -103,4 +118,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-use-overlays nil))
+ '(magit-use-overlays nil)
+ '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
+ '(org-directory "~/Dropbox/orgfiles"))
