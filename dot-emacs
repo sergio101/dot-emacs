@@ -29,6 +29,7 @@
 
 (require 'rvm)
 
+;; Set up org mode
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (define-key global-map "\C-cc" 'org-capture)
 
@@ -38,6 +39,12 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 
+;; Set up mobile org
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+
+(require 'org-journal)
+(setq org-journal-dir "~/Dropbox/orgfiles/journal/")
+(setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
 ;; auto complete mode
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
@@ -118,8 +125,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles/PVComm.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/inbox.org")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles")
+ '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
  '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9)))))

@@ -18,6 +18,7 @@
 (depends-on "helm-rails")
 (depends-on "magit")
 (depends-on "org-gcal")
+(depends-on "org-journal")
 (depends-on "org-plus-contrib")
 (depends-on "org-pomodoro")
 (depends-on "package-build")
