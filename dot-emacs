@@ -13,10 +13,6 @@
   (interactive "nSet tab width: ")
   (setq tab-width width))
 
-(require 'org-gcal)
-(setq org-gcal-client-id "1057237893562-iq24bqiease9336c66kfj451sg5sm9i5.apps.googleusercontent.com"
-      org-gcal-client-secret "jbqgULmrW5Sidy0tJwuaCqFg"
-      org-gcal-file-alist '(("sergio.rrd@gmail.com" .  "~/Dropbox/orgfiles/calendar.org")))
 
 ;; set up buf-move
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
