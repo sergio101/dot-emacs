@@ -1,6 +1,7 @@
 (source melpa)
 (source org)
 
+(depends-on "ansi")
 (depends-on "auto-complete")
 (depends-on "cask")
 (depends-on "dash")
@@ -20,4 +21,5 @@
 (depends-on "s")
 (depends-on "shut-up")
 (depends-on "solarized-theme")
+(depends-on "tidy")
 (depends-on "yasnippet")

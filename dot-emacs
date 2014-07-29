@@ -25,6 +25,10 @@
 
 (require 'rvm)
 
+;; ansi color
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+
 ;; Set up org mode
 
 (define-key global-map "\C-cc" 'org-capture)
@@ -94,6 +98,12 @@
 ;; projectile mode
 (add-hook 'ruby-mode-hook 'projectile-on)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
+(define-key projectile-rails-mode-map (kbd "s-m")   'projectile-rails-find-model)
+(define-key projectile-rails-mode-map (kbd "s-c")   'projectile-rails-find-controller)
+(define-key projectile-rails-mode-map (kbd "s-v")   'projectile-rails-find-view)
+(define-key projectile-rails-mode-map (kbd "s-RET") 'projectile-rails-goto-file-at-point)
+(define-key projectile-rails-mode-map (kbd "C-c g")  projectile-rails-mode-goto-map)
+
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
@@ -122,11 +132,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ag-executable "/usr/local/bin/ag")
  '(diary-file "~/Dropbox/orgfiles/diary")
  '(ido-use-faces nil)
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
+ '(org-agenda-files (quote ("~/Dropbox/orgfiles")) t)
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
