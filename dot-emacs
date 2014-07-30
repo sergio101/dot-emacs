@@ -97,12 +97,10 @@
 
 ;; projectile mode
 (add-hook 'ruby-mode-hook 'projectile-on)
+(add-hook 'ruby-mode-hook 'ruby-electric-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
-(define-key projectile-rails-mode-map (kbd "s-m")   'projectile-rails-find-model)
-(define-key projectile-rails-mode-map (kbd "s-c")   'projectile-rails-find-controller)
-(define-key projectile-rails-mode-map (kbd "s-v")   'projectile-rails-find-view)
-(define-key projectile-rails-mode-map (kbd "s-RET") 'projectile-rails-goto-file-at-point)
-(define-key projectile-rails-mode-map (kbd "C-c g")  projectile-rails-mode-goto-map)
+
+
 
 
 ;; automatically save buffers associated with files on buffer switch
