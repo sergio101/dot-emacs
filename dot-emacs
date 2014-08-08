@@ -13,6 +13,8 @@
   (interactive "nSet tab width: ")
   (setq tab-width width))
 
+;; custom key bindings
+(global-set-key (kbd "\C-ct") 'toggle-truncate-lines)
 
 ;; set up buf-move
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
@@ -92,6 +94,8 @@
 (add-hook 'nxhtml-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))
 
+;; turn on column number
+(setq column-number-mode t)
 ;; set up ispell
 (setq ispell-program-name "/usr/local/bin/ispell")
 
@@ -141,5 +145,6 @@
  '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
  '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
- '(url-history-file "/Users/sergio/.emacs.d/url/history"))
+ '(url-history-file "/Users/sergio/.emacs.d/url/history")
+ '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
 
