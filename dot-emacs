@@ -104,6 +104,10 @@
 (add-hook 'ruby-mode-hook 'ruby-electric-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
+;; set up rails mode
+(global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
+(global-set-key (kbd "C-c C-m")  'projectile-rails-find-model)
+(global-set-key (kbd "C-c C-c")  'projectile-rails-find-controller)
 
 
 
@@ -137,6 +141,7 @@
  '(ac-use-fuzzy t)
  '(ag-executable "/usr/local/bin/ag")
  '(diary-file "~/Dropbox/orgfiles/diary")
+ '(haml-indent-offset 3)
  '(ido-use-faces nil)
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
