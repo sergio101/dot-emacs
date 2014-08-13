@@ -13,6 +13,8 @@
   (interactive "nSet tab width: ")
   (setq tab-width width))
 
+;; custom key bindings
+(global-set-key (kbd "\C-ct") 'toggle-truncate-lines)
 
 ;; set up buf-move
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
@@ -92,6 +94,8 @@
 (add-hook 'nxhtml-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))
 
+;; turn on column number
+(setq column-number-mode t)
 ;; set up ispell
 (setq ispell-program-name "/usr/local/bin/ispell")
 
@@ -100,6 +104,10 @@
 (add-hook 'ruby-mode-hook 'ruby-electric-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
+;; set up rails mode
+(global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
+(global-set-key (kbd "C-c C-m")  'projectile-rails-find-model)
+(global-set-key (kbd "C-c C-c")  'projectile-rails-find-controller)
 
 
 
@@ -130,16 +138,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-use-fuzzy t)
  '(ag-executable "/usr/local/bin/ag")
  '(diary-file "~/Dropbox/orgfiles/diary")
+ '(haml-indent-offset 3)
  '(ido-use-faces nil)
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles")) t)
+ '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
  '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
- '(url-history-file "/Users/sergio/.emacs.d/url/history"))
+ '(url-history-file "/Users/sergio/.emacs.d/url/history")
+ '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
 
