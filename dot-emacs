@@ -55,6 +55,11 @@
 (add-to-list 'ac-modes 'enh-ruby-mode)
 (add-to-list 'ac-modes 'haml-mode)
 
+;; set auto modes for enh-ruby-mode
+(setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("Gemfile" . enh-ruby-mode) auto-mode-alist))
+
+
 ;windmore
 (require 'windmove)
 (when (fboundp 'windmove-default-keybindings)
