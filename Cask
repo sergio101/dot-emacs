@@ -16,6 +16,7 @@
 (depends-on "f")
 (depends-on "flx-ido")
 (depends-on "fuzzy")
+(depends-on "gist")
 (depends-on "goto-last-change")
 (depends-on "handlebars-mode")
 (depends-on "helm-spotify")
