@@ -23,9 +23,9 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 ;; set up twittering
-(global-set-key "\C-f" 'twittering-favorite)
+(global-set-key "\C-cf" 'twittering-favorite)
 
-;; stop with dialog boxes
+;; Stop with dialog boxes
 
 (custom-set-variables
  '(use-dialog-box nil)
