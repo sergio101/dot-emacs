@@ -22,6 +22,15 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+;; set up twittering
+(global-set-key "\C-f" 'twittering-favorite)
+
+;; stop with dialog boxes
+
+(custom-set-variables
+ '(use-dialog-box nil)
+ '(use-file-dialog nil))
+
 (require 'yasnippet)			
 (yas-global-mode 1)
 
@@ -155,7 +164,11 @@
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
  '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
+ '(rspec-command-options "--format documentation --drb")
+ '(rspec-use-rake-when-possible nil)
+ '(rspec-use-rvm t)
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
  '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
 
+(put 'dired-find-alternate-file 'disabled nil)
