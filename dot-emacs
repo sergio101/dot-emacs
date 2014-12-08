@@ -28,11 +28,40 @@
 ;; Stop with dialog boxes
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-use-fuzzy t)
+ '(ag-executable "/usr/local/bin/ag")
+ '(diary-file "~/Dropbox/orgfiles/diary")
+ '(haml-indent-offset 3)
+ '(ido-use-faces nil)
+ '(magit-diff-use-overlays nil)
+ '(magit-use-overlays nil)
+ '(org-agenda-files (quote ("~/Dropbox/orgfiles")) t)
+ '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
+ '(org-directory "~/Dropbox/orgfiles/")
+ '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
+ '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
+ '(rspec-command-options "--format documentation --drb")
+ '(rspec-rake-command "rake")
+ '(rspec-spec-command "rspec")
+ '(rspec-use-bundler-when-possible nil)
+ '(rspec-use-rake-when-possible nil)
+ '(rspec-use-rvm t)
+ '(rspec-use-spring-when-possible t)
+ '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
+ '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(use-dialog-box nil)
- '(use-file-dialog nil))
+ '(use-file-dialog nil)
+ '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
 
 (require 'yasnippet)			
 (yas-global-mode 1)
+
+;; Keep auto complete from pooping out.
+(setq ac-source-yasnippet nil)
 
 (require 'rvm)
 
@@ -146,29 +175,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "apple" :family "Source Code Pro"))))
+ '(hackernews-link-face ((t (:foreground "gray55"))))
  '(info-title-4 ((t (:inherit default :weight bold)))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ac-use-fuzzy t)
- '(ag-executable "/usr/local/bin/ag")
- '(diary-file "~/Dropbox/orgfiles/diary")
- '(haml-indent-offset 3)
- '(ido-use-faces nil)
- '(magit-diff-use-overlays nil)
- '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
- '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
- '(org-directory "~/Dropbox/orgfiles/")
- '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
- '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
- '(rspec-command-options "--format documentation --drb")
- '(rspec-use-rake-when-possible nil)
- '(rspec-use-rvm t)
- '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
- '(url-history-file "/Users/sergio/.emacs.d/url/history")
- '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
+
 
 (put 'dired-find-alternate-file 'disabled nil)
