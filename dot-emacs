@@ -47,7 +47,7 @@
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
- '(rspec-use-bundler-when-possible nil)
+ '(rspec-use-bundler-when-possible t)
  '(rspec-use-rake-when-possible nil)
  '(rspec-use-rvm t)
  '(rspec-use-spring-when-possible t)
