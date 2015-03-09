@@ -25,6 +25,9 @@
 ;; set up twittering
 (global-set-key "\C-cf" 'twittering-favorite)
 
+;; set file extensions
+(add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
+
 ;; Stop with dialog boxes
 
 (custom-set-variables
