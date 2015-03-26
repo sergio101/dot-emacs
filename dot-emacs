@@ -22,13 +22,29 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
-;; set up twittering
-(global-set-key "\C-cf" 'twittering-favorite)
+;; set up pocket
+ (el-pocket-load-auth)
+(global-set-key "\C-cf" 'el-pocket-add)
 
 ;; set file extensions
 (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
 
 ;; Stop with dialog boxes
+
+;; set up jump mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+;; set up apache file editing
+
+  (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
+  (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
+  (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
+  (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
+  (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -89,9 +105,9 @@
 (setq org-journal-dir "~/Dropbox/orgfiles/journal/")
 (setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
 ;; auto complete mode
-(add-to-list 'load-path "~/.emacs.d/")
+;;(add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.3.1/elpa/auto-complete-20140618.2217/dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.4.1/elpa/auto-complete-20150322.813/dict")
 (ac-config-default)
 (add-to-list 'ac-modes 'enh-ruby-mode)
 (add-to-list 'ac-modes 'haml-mode)
