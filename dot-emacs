@@ -5,6 +5,7 @@
 (require 'pallet)
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (load-theme 'solarized-light t)
 (projectile-global-mode)
     (require 'ido)
@@ -87,6 +88,8 @@
 ;; ansi color
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; set up helm
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; Set up org mode
 
