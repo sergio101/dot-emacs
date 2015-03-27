@@ -1,4 +1,4 @@
-					;-*-Lisp-*-
+;-*-Lisp-*-
 
 (require 'cask "/usr/local/Cellar/cask/0.7.0/cask.el")
 (cask-initialize)
