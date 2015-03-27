@@ -100,6 +100,7 @@
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
 
+(setq global-ace-isearch-mode t)
 ;; Set up org mode
 
 (define-key global-map "\C-cc" 'org-capture)
