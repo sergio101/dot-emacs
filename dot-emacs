@@ -1,4 +1,4 @@
-;-*-Lisp-*-
+					;-*-Lisp-*-
 
 (require 'cask "/usr/local/Cellar/cask/0.7.0/cask.el")
 (cask-initialize)
@@ -8,8 +8,8 @@
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (load-theme 'solarized-light t)
 (projectile-global-mode)
-    (require 'ido)
-    (ido-mode t)
+(require 'ido)
+(ido-mode t)
 (defun set-tab-width (width)
   (interactive "nSet tab width: ")
   (setq tab-width width))
@@ -24,8 +24,8 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 ;; set up pocket
- (el-pocket-load-auth)
-(global-set-key "\C-cf" 'el-pocket-add)
+;; (el-pocket-load-auth)
+(global-set-key "\C-cf" 'twittering-favorite)
 
 ;; set file extensions
 (add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
@@ -91,6 +91,14 @@
 ;; set up helm
 (global-set-key (kbd "M-x") 'helm-M-x)
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
+(global-set-key (kbd "C-x b") 'helm-mini)
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+(global-set-key (kbd "C-c h i") 'helm-semantic-or-imenu)
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
 
 ;; Set up org mode
 
