@@ -37,7 +37,7 @@
 (eval-after-load "ace-jump-mode"
   '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
-
+(global-ace-isearch-mode +1)
 ;; set up apache file editing
 
   (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
@@ -59,11 +59,14 @@
  '(ido-use-faces nil)
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles")) t)
+ '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
- '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
+ '(org-refile-targets
+   (quote
+    ((org-agenda-files :maxlevel . 9)
+     (nil :maxlevel . 9))))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -71,17 +74,18 @@
  '(rspec-use-rake-when-possible nil)
  '(rspec-use-rvm t)
  '(rspec-use-spring-when-possible t)
+ '(ruby-test-rspec-options (quote ("-b -erb")))
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
  '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(use-dialog-box nil)
  '(use-file-dialog nil)
- '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
+ '(yas-global-mode t nil (yasnippet))
+ '(yas-snippet-dirs
+   (quote
+    ("/Users/sergio/emacs_d/.cask/24.4.1/elpa/yasnippet-20150405.1526/snippets/" "/Users/sergio/emacs_d/snippets" yas-installed-snippets-dir)) nil (yasnippet)))
 
-(require 'yasnippet)			
-(yas-global-mode 1)
 
-;; Keep auto complete from pooping out.
-(setq ac-source-yasnippet nil)
+
 
 (require 'rvm)
 
@@ -159,9 +163,6 @@
 (add-hook 'abg-code-modes-hook
           (lambda () (linum-mode 1))
           (lambda () (auto-fill-mode 0)))
-(add-hook 'ruby-mode-hook
-          (lambda () (run-hooks 'abg-code-modes-hook)))
-
 
 (add-hook 'enh-ruby-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))
@@ -175,7 +176,7 @@
 (setq ispell-program-name "/usr/local/bin/ispell")
 
 ;; projectile mode
-(add-hook 'ruby-mode-hook 'projectile-on)
+(add-hook 'enh-ruby-mode-hook 'projectile-on)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 ;; Robe mode
