@@ -5,10 +5,11 @@
 (require 'pallet)
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (load-theme 'solarized-light t)
 (projectile-global-mode)
-    (require 'ido)
-    (ido-mode t)
+(require 'ido)
+(ido-mode t)
 (defun set-tab-width (width)
   (interactive "nSet tab width: ")
   (setq tab-width width))
@@ -22,24 +23,84 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
-;; set up twittering
+;; set up pocket
+;; (el-pocket-load-auth)
 (global-set-key "\C-cf" 'twittering-favorite)
+
+;; set file extensions
+(add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
 
 ;; Stop with dialog boxes
 
+;; set up jump mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+;; set up apache file editing
+
+  (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
+  (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
+  (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
+  (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
+  (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+
+
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-use-fuzzy t)
+ '(ag-executable "/usr/local/bin/ag")
+ '(diary-file "~/Dropbox/orgfiles/diary")
+ '(haml-indent-offset 3)
+ '(ido-use-faces nil)
+ '(magit-diff-use-overlays nil)
+ '(magit-use-overlays nil)
+ '(org-agenda-files (quote ("~/Dropbox/orgfiles")) t)
+ '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
+ '(org-directory "~/Dropbox/orgfiles/")
+ '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
+ '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
+ '(rspec-command-options "--format documentation --drb")
+ '(rspec-rake-command "rake")
+ '(rspec-spec-command "rspec")
+ '(rspec-use-bundler-when-possible t)
+ '(rspec-use-rake-when-possible nil)
+ '(rspec-use-rvm t)
+ '(rspec-use-spring-when-possible t)
+ '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
+ '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(use-dialog-box nil)
- '(use-file-dialog nil))
+ '(use-file-dialog nil)
+ '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
 
 (require 'yasnippet)			
 (yas-global-mode 1)
+
+;; Keep auto complete from pooping out.
+(setq ac-source-yasnippet nil)
 
 (require 'rvm)
 
 ;; ansi color
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; set up helm
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
+(global-set-key (kbd "C-x b") 'helm-mini)
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+(global-set-key (kbd "C-c h i") 'helm-semantic-or-imenu)
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+
+(setq global-ace-isearch-mode t)
 ;; Set up org mode
 
 (define-key global-map "\C-cc" 'org-capture)
@@ -57,9 +118,9 @@
 (setq org-journal-dir "~/Dropbox/orgfiles/journal/")
 (setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
 ;; auto complete mode
-(add-to-list 'load-path "~/.emacs.d/")
+;;(add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.3.1/elpa/auto-complete-20140618.2217/dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.4.1/elpa/auto-complete-20150322.813/dict")
 (ac-config-default)
 (add-to-list 'ac-modes 'enh-ruby-mode)
 (add-to-list 'ac-modes 'haml-mode)
@@ -115,8 +176,11 @@
 
 ;; projectile mode
 (add-hook 'ruby-mode-hook 'projectile-on)
-(add-hook 'ruby-mode-hook 'ruby-electric-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
+
+;; Robe mode
+(add-hook 'ruby-mode-hook 'robe-mode)
+
 
 ;; set up rails mode
 (global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
@@ -146,29 +210,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "apple" :family "Source Code Pro"))))
+ '(hackernews-link-face ((t (:foreground "gray55"))))
  '(info-title-4 ((t (:inherit default :weight bold)))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ac-use-fuzzy t)
- '(ag-executable "/usr/local/bin/ag")
- '(diary-file "~/Dropbox/orgfiles/diary")
- '(haml-indent-offset 3)
- '(ido-use-faces nil)
- '(magit-diff-use-overlays nil)
- '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
- '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
- '(org-directory "~/Dropbox/orgfiles/")
- '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
- '(org-refile-targets (quote ((org-agenda-files :maxlevel . 9) (nil :maxlevel . 9))))
- '(rspec-command-options "--format documentation --drb")
- '(rspec-use-rake-when-possible nil)
- '(rspec-use-rvm t)
- '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
- '(url-history-file "/Users/sergio/.emacs.d/url/history")
- '(yas-snippet-dirs (quote ("~/.emacs.d/snippets/rails-snippets" "/Users/sergio/emacs_d/.cask/24.3.1/elpa/yasnippet-20140729.1240/snippets")) nil (yasnippet)))
+
 
 (put 'dired-find-alternate-file 'disabled nil)
