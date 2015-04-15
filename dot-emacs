@@ -179,9 +179,6 @@
 (add-hook 'enh-ruby-mode-hook 'projectile-on)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
-;; Robe mode
-(add-hook 'ruby-mode-hook 'robe-mode)
-
 
 ;; set up rails mode
 (global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
