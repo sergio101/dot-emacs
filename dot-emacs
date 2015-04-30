@@ -123,16 +123,22 @@
 (setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
 ;; auto complete mode
 ;;(add-to-list 'load-path "~/.emacs.d/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.4.1/elpa/auto-complete-20150322.813/dict")
-(ac-config-default)
-(add-to-list 'ac-modes 'enh-ruby-mode)
-(add-to-list 'ac-modes 'haml-mode)
+;;(require 'auto-complete-config)
+;;(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.4.1/elpa/auto-complete-20150322.813/dict")
+;;(ac-config-default)
+;;(add-to-list 'ac-modes 'enh-ruby-mode)
+;;(add-to-list 'ac-modes 'haml-mode)
 
 ;; set auto modes for enh-ruby-mode
-(setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("Gemfile" . enh-ruby-mode) auto-mode-alist))
+;;(setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
+;;(setq auto-mode-alist (cons '("Gemfile" . enh-ruby-mode) auto-mode-alist))
 
+;; try out company mode for completion
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;windmore
 (require 'windmove)
