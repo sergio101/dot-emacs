@@ -177,6 +177,10 @@
 (add-hook 'nxhtml-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))
 
+(require 'flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+
+
 ;; turn on column number
 (setq column-number-mode t)
 ;; set up ispell
