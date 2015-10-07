@@ -7,7 +7,9 @@
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-(load-theme 'solarized-light t)
+
+
+
 (projectile-global-mode)
 (require 'ido)
 (ido-mode t)
@@ -42,7 +44,7 @@
 ;; set up apache file editing
 
   (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
-  (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
+  (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  .  apache-mode))
   (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
   (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
   (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
@@ -55,9 +57,14 @@
  ;; If there is more than one, they won't work right.
  '(ac-use-fuzzy t)
  '(ag-executable "/usr/local/bin/ag")
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
+ '(custom-theme-load-path nil)
  '(diary-file "~/Dropbox/orgfiles/diary")
  '(haml-indent-offset 3)
  '(ido-use-faces nil)
+ '(ledger-binary-path "/usr/local/bin/ledger")
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
  '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
@@ -84,9 +91,6 @@
  '(yas-snippet-dirs
    (quote
     ("/Users/sergio/emacs_d/.cask/24.4.1/elpa/yasnippet-20150405.1526/snippets/" "/Users/sergio/emacs_d/snippets" yas-installed-snippets-dir)) nil (yasnippet)))
-
-
-
 
 (require 'rvm)
 
@@ -122,13 +126,6 @@
 (require 'org-journal)
 (setq org-journal-dir "~/Dropbox/orgfiles/journal/")
 (setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
-;; auto complete mode
-;;(add-to-list 'load-path "~/.emacs.d/")
-;;(require 'auto-complete-config)
-;;(add-to-list 'ac-dictionary-directories "~/.emacs.d/.cask/24.4.1/elpa/auto-complete-20150322.813/dict")
-;;(ac-config-default)
-;;(add-to-list 'ac-modes 'enh-ruby-mode)
-;;(add-to-list 'ac-modes 'haml-mode)
 
 ;; set auto modes for enh-ruby-mode
 ;;(setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
@@ -145,6 +142,7 @@
 (require 'windmove)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
 ;; turn on truncate long lines
 (toggle-truncate-lines t)
 
@@ -191,6 +189,7 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 
+
 ;; set up rails mode
 (global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
 (global-set-key (kbd "C-c C-m")  'projectile-rails-find-model)
@@ -213,15 +212,6 @@
 (defadvice windmove-right (before other-window-now activate)
   (when buffer-file-name (save-buffer)))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "apple" :family "Source Code Pro"))))
- '(hackernews-link-face ((t (:foreground "gray55"))))
- '(info-title-4 ((t (:inherit default :weight bold)))))
-
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -236,3 +226,15 @@
         (next-line)))
 
 (global-set-key (kbd "C-;")  'comment-or-uncomment-region-or-line)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+;; now, apply theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(set-face-attribute 'default nil :height 140)
+(set-default-font "Source Code Pro")
