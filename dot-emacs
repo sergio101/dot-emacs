@@ -62,12 +62,15 @@
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
  '(custom-theme-load-path nil)
  '(diary-file "~/Dropbox/orgfiles/diary")
+ '(geeknote-command "/usr/local/bin/geeknote")
  '(haml-indent-offset 3)
  '(ido-use-faces nil)
  '(ledger-binary-path "/usr/local/bin/ledger")
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/Dropbox/orgfiles")))
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-mobile-inbox-for-pull "~/Dropbox/Apps/MobileOrg/from-mobile.org")
@@ -112,6 +115,9 @@
 (setq global-ace-isearch-mode t)
 ;; Set up org mode
 
+(setq org-directory "~/Dropbox/orgfiles/")
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+
 (define-key global-map "\C-cc" 'org-capture)
 
 (global-set-key "\C-cl" 'org-store-link)
@@ -119,6 +125,16 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
+
+(setq org-log-done 'time)
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
+               "* TODO %?\n%U\n%a\n\n\n" :clock-in t :clock-resume t)
+              ("n" "note" entry (file (concat org-directory "/inbox.org"))
+               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("j" "Journal" entry (file+datetree (concat org-directory "/diary.org"))
+               "* %?\n%U\n" :clock-in t :clock-resume t)
+              )))
 
 ;; Set up mobile org
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg/")
