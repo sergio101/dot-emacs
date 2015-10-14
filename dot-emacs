@@ -146,7 +146,8 @@
 ;; set auto modes for enh-ruby-mode
 ;;(setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
 ;;(setq auto-mode-alist (cons '("Gemfile" . enh-ruby-mode) auto-mode-alist))
-
+(add-hook 'ruby-mode-hook 'linum-mode)
+(add-hook 'enh-ruby-mode-hook 'linum-mode)
 ;; try out company mode for completion
 (eval-after-load 'company
   '(progn
@@ -254,3 +255,4 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (set-face-attribute 'default nil :height 140)
 (set-default-font "Source Code Pro")
+(load-theme 'zenburn)
