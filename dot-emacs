@@ -278,7 +278,3 @@
 (emms-standard)
 (emms-default-players)
 
-
-;; run on close emacs
-
-(add-hook 'kill-emacs-hook (lambda () (progo-run-agenda-store)))
