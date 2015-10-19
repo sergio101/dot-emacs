@@ -75,11 +75,11 @@
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
    (quote
-    ("~/Dropbox/orgfiles/Someday.org" "~/dot-emacs/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
+    ("~/Dropbox/orgfiles/PVTasks.org" "~/Dropbox/orgfiles/Someday.org" "~/dot-emacs/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-journal-dir "~/Dropbox/orgfiles/journal/")
- '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/from-mobile.org")
+ '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/inbox.org")
  '(org-refile-targets
    (quote
     ((org-agenda-files :maxlevel . 9)
@@ -156,19 +156,6 @@
 (require 'org-journal)
 (setq org-journal-dir "~/Dropbox/orgfiles/journal/")
 (setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
-
-
-;; run mobile dump every 10 minutes
-(defun progo-run-agenda-store ()
-  ""
-  (message "Agenda to be exported... ")
-  (org-mobile-push)
-  (org-mobile-pull)
-  (message "Agenda exported!"))
-
-(run-at-time 0 600 'progo-run-agenda-store)
-
-
 
 
 ;; set auto modes for enh-ruby-mode
