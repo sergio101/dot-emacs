@@ -163,6 +163,7 @@
 ;;(setq auto-mode-alist (cons '("Gemfile" . enh-ruby-mode) auto-mode-alist))
 (add-hook 'ruby-mode-hook 'linum-mode)
 (add-hook 'enh-ruby-mode-hook 'linum-mode)
+(add-hook 'php-mode 'linum-mode)
 ;; try out company mode for completion
 (eval-after-load 'company
   '(progn
