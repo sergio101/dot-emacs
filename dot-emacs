@@ -279,3 +279,10 @@
 (emms-standard)
 (emms-default-players)
 
+;; set up paths for latex/tex
+(getenv "PATH")
+ (setenv "PATH"
+(concat
+ "/Library/TeX/texbin/" ":"
+
+(getenv "PATH")))
