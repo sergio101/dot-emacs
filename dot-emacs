@@ -8,6 +8,8 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 
+;; set up backup files
+(setq backup-directory-alist `(("." . "~/.saves")))
 
 
 (projectile-global-mode)
@@ -62,6 +64,7 @@
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
  '(custom-theme-load-path nil)
  '(diary-file "~/Dropbox/orgfiles/diary")
+ '(ember-completion-system (quote helm))
  '(emms-player-list
    (quote
     (emms-player-mpg321 emms-player-mplayer-playlist emms-player-mplayer)))
@@ -69,9 +72,13 @@
  '(geeknote-command "/usr/local/bin/geeknote")
  '(haml-indent-offset 3)
  '(ido-use-faces nil)
+ '(js-indent-level 2)
  '(ledger-binary-path "/usr/local/bin/ledger")
  '(magit-diff-use-overlays nil)
+ '(magit-push-always-verify nil)
  '(magit-use-overlays nil)
+ '(minitest-use-bundler nil)
+ '(minitest-use-zeus-when-possible t)
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
    (quote
@@ -285,4 +292,15 @@
 (concat
  "/Library/TeX/texbin/" ":"
 
+ (getenv "PATH")))
+
+(getenv "PATH")
+ (setenv "PATH"
+(concat
+ "/usr/local/bin/" ":"
+
 (getenv "PATH")))
+
+;; fixes the problem with the meta key in the command line
+
+(set-keyboard-coding-system nil)
