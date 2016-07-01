@@ -49,7 +49,18 @@
   (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  .  apache-mode))
   (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
   (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
-  (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+(add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+
+;; set up executable files
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; set up emms
+(add-to-list 'load-path "~/elisp/emms/")
+(require 'emms-setup)
+(emms-standard)
+(emms-default-players)
+(require 'emms-streams)
+
 
 
 (custom-set-variables
@@ -65,9 +76,9 @@
  '(custom-theme-load-path nil)
  '(diary-file "~/Dropbox/orgfiles/diary")
  '(ember-completion-system (quote helm))
- '(emms-player-list
-   (quote
-    (emms-player-mpg321 emms-player-mplayer-playlist emms-player-mplayer)))
+ '(emms-player-list (quote (emms-player-mplayer-playlist emms-player-mplayer)))
+ '(emms-player-mplayer-command-name "tsocks mplayer")
+ '(emms-player-mplayer-playlist-command-name "tsocks mplayer")
  '(epg-gpg-program "/usr/local/bin/gpg")
  '(geeknote-command "/usr/local/bin/geeknote")
  '(haml-indent-offset 3)
@@ -82,9 +93,10 @@
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
    (quote
-    ("~/Dropbox/orgfiles/PVTasks.org" "~/Dropbox/orgfiles/Someday.org" "~/dot-emacs/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
+    ("~/Dropbox/orgfiles/PVTasks.org" "~/Dropbox/orgfiles/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
+ '(org-export-with-author nil)
  '(org-journal-dir "~/Dropbox/orgfiles/journal/")
  '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/inbox.org")
  '(org-refile-targets
@@ -229,12 +241,10 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 
-
 ;; set up rails mode
 (global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
 (global-set-key (kbd "C-c C-m")  'projectile-rails-find-model)
 (global-set-key (kbd "C-c C-c")  'projectile-rails-find-controller)
-
 
 
 ;; automatically save buffers associated with files on buffer switch
@@ -271,7 +281,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(hackernews-comment-count-face ((t (:foreground "gray60"))))
+ '(hackernews-link-face ((t (:foreground "gray51")))))
 
 
 ;; now, apply theme
@@ -280,11 +291,7 @@
 (set-default-font "Source Code Pro")
 (load-theme 'zenburn)
 
-;; set up emms
-(add-to-list 'load-path "~/elisp/emms/")
-(require 'emms-setup)
-(emms-standard)
-(emms-default-players)
+
 
 ;; set up paths for latex/tex
 (getenv "PATH")
@@ -304,3 +311,4 @@
 ;; fixes the problem with the meta key in the command line
 
 (set-keyboard-coding-system nil)
+(put 'narrow-to-defun 'disabled nil)
