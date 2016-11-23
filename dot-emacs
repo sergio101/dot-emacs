@@ -1,6 +1,13 @@
 ;-*-Lisp-*-
 
-(require 'cask "/usr/local/Cellar/cask/0.7.0/cask.el")
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(require 'cask "/usr/local/Cellar/cask/0.7.2/cask.el")
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
@@ -73,7 +80,7 @@
  '(custom-safe-themes
    (quote
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
- '(custom-theme-load-path nil)
+ '(custom-theme-load-path nil t)
  '(diary-file "~/Dropbox/orgfiles/diary")
  '(ember-completion-system (quote helm))
  '(emms-player-list (quote (emms-player-mplayer-playlist emms-player-mplayer)))
@@ -103,6 +110,9 @@
    (quote
     ((org-agenda-files :maxlevel . 9)
      (nil :maxlevel . 9))))
+ '(package-selected-packages
+   (quote
+    (coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -114,11 +124,8 @@
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
  '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(use-dialog-box nil)
- '(use-file-dialog nil)
- '(yas-global-mode t nil (yasnippet))
- '(yas-snippet-dirs
-   (quote
-    ("/Users/sergio/emacs_d/.cask/24.4.1/elpa/yasnippet-20150405.1526/snippets/" "/Users/sergio/emacs_d/snippets" yas-installed-snippets-dir)) nil (yasnippet)))
+ '(use-file-dialog nil))
+
 
 (require 'rvm)
 
@@ -239,6 +246,7 @@
 ;; projectile mode
 (add-hook 'enh-ruby-mode-hook 'projectile-on)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
+(projectile-rails-global-mode)
 
 
 ;; set up rails mode
@@ -312,3 +320,6 @@
 
 (set-keyboard-coding-system nil)
 (put 'narrow-to-defun 'disabled nil)
+
+;; add yasnippet
+
