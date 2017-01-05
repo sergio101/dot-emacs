@@ -1,4 +1,4 @@
-;-*-Lisp-*-
+					;-*-Lisp-*-
 
 
 ;; Added by Package.el.  This must come before configurations of
@@ -52,10 +52,10 @@
 (global-ace-isearch-mode +1)
 ;; set up apache file editing
 
-  (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
-  (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  .  apache-mode))
-  (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
-  (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
+(add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  .  apache-mode))
+(add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
+(add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
 (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
 
 ;; set up executable files
@@ -105,6 +105,7 @@
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-export-with-author nil)
  '(org-journal-dir "~/Dropbox/orgfiles/journal/")
+ '(org-md-headline-style (quote setext))
  '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/inbox.org")
  '(org-refile-targets
    (quote
@@ -112,7 +113,7 @@
      (nil :maxlevel . 9))))
  '(package-selected-packages
    (quote
-    (coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+    (ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -197,7 +198,7 @@
      (define-key company-active-map (kbd "C-:") 'helm-company)))
 (add-hook 'after-init-hook 'global-company-mode)
 
-;windmore
+					;windmore
 (require 'windmove)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
@@ -274,14 +275,14 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 (defun comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)
-        (next-line)))
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)
+    (next-line)))
 
 (global-set-key (kbd "C-;")  'comment-or-uncomment-region-or-line)
 (custom-set-faces
@@ -303,18 +304,18 @@
 
 ;; set up paths for latex/tex
 (getenv "PATH")
- (setenv "PATH"
-(concat
- "/Library/TeX/texbin/" ":"
+(setenv "PATH"
+	(concat
+	 "/Library/TeX/texbin/" ":"
 
- (getenv "PATH")))
+	 (getenv "PATH")))
 
 (getenv "PATH")
- (setenv "PATH"
-(concat
- "/usr/local/bin/" ":"
+(setenv "PATH"
+	(concat
+	 "/usr/local/bin/" ":"
 
-(getenv "PATH")))
+	 (getenv "PATH")))
 
 ;; fixes the problem with the meta key in the command line
 
@@ -322,4 +323,14 @@
 (put 'narrow-to-defun 'disabled nil)
 
 ;; add yasnippet
+(setq yas-snippet-dirs
+      '("~/.emacs.d/yasnippet-snippets"))
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; emmet mode
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+
 
