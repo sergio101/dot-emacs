@@ -333,4 +333,9 @@
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
+;; set tab width
+(setq-default tab-width 3)
 
+;; add markdown export to org
+(eval-after-load "org"
+  '(require 'ox-md nil t))
