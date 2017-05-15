@@ -78,8 +78,8 @@
  '(ac-use-fuzzy t)
  '(ag-executable "/usr/local/bin/ag")
  '(custom-safe-themes
-   (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
+	(quote
+	 ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
  '(custom-theme-load-path nil t)
  '(diary-file "~/Dropbox/orgfiles/diary")
  '(ember-completion-system (quote helm))
@@ -99,8 +99,8 @@
  '(minitest-use-zeus-when-possible t)
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
-   (quote
-    ("~/Dropbox/orgfiles/PVTasks.org" "~/Dropbox/orgfiles/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
+	(quote
+	 ("~/Dropbox/orgfiles/PVTasks.org" "~/Dropbox/orgfiles/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-export-with-author nil)
@@ -108,12 +108,12 @@
  '(org-md-headline-style (quote setext))
  '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/inbox.org")
  '(org-refile-targets
-   (quote
-    ((org-agenda-files :maxlevel . 9)
-     (nil :maxlevel . 9))))
+	(quote
+	 ((org-agenda-files :maxlevel . 9)
+	  (nil :maxlevel . 9))))
  '(package-selected-packages
-   (quote
-    (ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+	(quote
+	 (minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
