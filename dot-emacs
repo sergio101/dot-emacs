@@ -1,4 +1,4 @@
-					;-*-Lisp-*-
+				;-*-Lisp-*-
 
 
 ;; Added by Package.el.  This must come before configurations of
@@ -7,10 +7,20 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(require 'cask "/usr/local/Cellar/cask/0.7.2/cask.el")
+;; Set up tramp mode
+
+(setq tramp-default-method "ssh")
+
+
+
+
+;; sets up cask
+(require 'cask "/usr/local/Cellar/cask/0.8.4/cask.el")
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
+
+
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -100,20 +110,22 @@
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
 	(quote
-	 ("~/Dropbox/orgfiles/PVTasks.org" "~/Dropbox/orgfiles/Someday.org" "~/Dropbox/Projects/FacebookSongDedication/pharo4_implement/PageDNA.org" "~/Dropbox/orgfiles/Home.org" "~/Dropbox/orgfiles/VillageBuzz.org" "~/Dropbox/orgfiles/TikTok.org" "~/Dropbox/orgfiles/OrgMode.org" "~/Dropbox/orgfiles/CoffeeBlack.org" "~/Dropbox/orgfiles/MorningToastAndJam.org" "~/Dropbox/orgfiles/LPSF.org" "~/Dropbox/orgfiles/Hewee.org" "/Users/sergio/Dropbox/orgfiles/inbox.org")))
+	 ("/Users/sergio/Dropbox/orgfiles/inbox.org" "~/Dropbox/orgfiles/CurrentTasks.org")))
+ '(org-confirm-babel-evaluate nil)
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-export-with-author nil)
  '(org-journal-dir "~/Dropbox/orgfiles/journal/")
  '(org-md-headline-style (quote setext))
- '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/inbox.org")
+ '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/CurrentTasks.org")
  '(org-refile-targets
 	(quote
 	 ((org-agenda-files :maxlevel . 9)
 	  (nil :maxlevel . 9))))
+ '(org-startup-indented t)
  '(package-selected-packages
 	(quote
-	 (minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+	 (magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -122,6 +134,7 @@
  '(rspec-use-rvm t)
  '(rspec-use-spring-when-possible t)
  '(ruby-test-rspec-options (quote ("-b -erb")))
+ '(setq org-default-notes-file t)
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
  '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(use-dialog-box nil)
@@ -148,8 +161,12 @@
 (setq global-ace-isearch-mode t)
 ;; Set up org mode
 
+;; set up languages on open
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)))
+
 (setq org-directory "~/Dropbox/orgfiles/")
-(setq org-default-notes-file (concat org-directory "/inbox.org"))
+(setq org-default-notes-file (concat org-directory "/CurrentTasks.org"))
 
 (define-key global-map "\C-cc" 'org-capture)
 
@@ -160,9 +177,10 @@
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 
 (setq org-log-done 'time)
+
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
-               "* TODO %? %^G\n%U\n%a\n\n\n\n" :empty-lines 1)
+      (` (("t" "todo" entry (file+headline ,(concat org-directory "/inbox.org") "Tasks")
+               "* TODO %?\n %U\n %a\n" )
               ("n" "note" entry (file (concat org-directory "/inbox.org"))
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
               )))
@@ -290,8 +308,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hackernews-comment-count-face ((t (:foreground "gray60"))))
- '(hackernews-link-face ((t (:foreground "gray51")))))
+ '(hackernews-comment-count-face ((t (:foreground "gray60"))) t)
+ '(hackernews-link-face ((t (:foreground "gray51"))) t))
 
 
 ;; now, apply theme
@@ -339,3 +357,6 @@
 ;; add markdown export to org
 (eval-after-load "org"
   '(require 'ox-md nil t))
+
+;; load emacs grammarly
+(load-file "/Users/sergio/.emacs.d/plugins/emacs-grammarly/emacs-grammarly.el")
