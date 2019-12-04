@@ -4,6 +4,7 @@
 (source org)
 
 (depends-on "ace-isearch")
+(depends-on "ace-jump-mode")
 (depends-on "alchemist")
 (depends-on "alert")
 (depends-on "ansi")
@@ -36,6 +37,7 @@
 (depends-on "magit-todos")
 (depends-on "mastodon")
 (depends-on "netrunner")
+(depends-on "org")
 (depends-on "org-gcal")
 (depends-on "org-journal")
 (depends-on "org-pomodoro")

@@ -1,18 +1,18 @@
-				;-*-Lisp-*-
+;-*-Lisp-*-
 
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (package-initialize)
 
 ;; Set up tramp mode
 
 (setq tramp-default-method "ssh")
-
-
-
 
 ;; sets up cask
 (require 'cask "/usr/local/Cellar/cask/0.8.4/cask.el")
@@ -21,9 +21,6 @@
 (pallet-mode t)
 
 
-(require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 
 ;; set up backup files
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -125,7 +122,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	(quote
-	 (magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+	 (org magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
