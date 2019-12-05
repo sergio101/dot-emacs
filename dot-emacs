@@ -10,6 +10,11 @@
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (package-initialize)
 
+
+;; Follow symbolic links
+(setq vc-follow-symlinks t)
+
+
 ;; Set up tramp mode
 
 (setq tramp-default-method "ssh")
@@ -154,7 +159,8 @@
 
 ;; set up languages on open
 (org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)))
+ 'org-babel-load-languages
+ '((ruby . t)(python . t)(shell . t)))
 
 (setq org-directory "~/Dropbox/orgfiles/")
 (setq org-default-notes-file (concat org-directory "/CurrentTasks.org"))
