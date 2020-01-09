@@ -6,10 +6,14 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
 
+
+;; For org-reveal
+;;(require 'ox-reveal)
+(setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 
 ;; Follow symbolic links
 (setq vc-follow-symlinks t)
@@ -59,8 +63,8 @@
   '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 (global-ace-isearch-mode +1)
-;; set up apache file editing
 
+;; set up apache file editing
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
 (add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  .  apache-mode))
 (add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
@@ -107,7 +111,7 @@
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
 	(quote
-	 ("/Users/sergio/Dropbox/orgfiles/inbox.org" "~/Dropbox/orgfiles/CurrentTasks.org")))
+	 ("~/Dropbox/orgfiles/personal/Research.org" "~/Dropbox/orgfiles/personal/ShoppingLists.org" "~/Dropbox/orgfiles/pvcomm/DefaultAPIDesign.org" "~/Dropbox/orgfiles/distractions.org" "/Users/sergio/Dropbox/orgfiles/inbox.org" "~/Dropbox/orgfiles/CurrentTasks.org")))
  '(org-confirm-babel-evaluate nil)
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
@@ -122,7 +126,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	(quote
-	 (org magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+	 (helm-company csharp-mode org-bullets ox-reveal org-re-reveal magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -156,6 +160,9 @@
 
 (setq global-ace-isearch-mode t)
 ;; Set up org mode
+
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; set up languages on open
 (org-babel-do-load-languages
