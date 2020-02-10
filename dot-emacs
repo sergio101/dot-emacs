@@ -10,31 +10,65 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
 
-
-;; For org-reveal
-;;(require 'ox-reveal)
-(setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
-
-;; Follow symbolic links
-(setq vc-follow-symlinks t)
-
-
-;; Set up tramp mode
-
-(setq tramp-default-method "ssh")
-
 ;; sets up cask
 (require 'cask "/usr/local/Cellar/cask/0.8.4/cask.el")
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
 
+;; Set up ido
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+(setq ido-use-filename-at-point 'guess)
+(setq ido-create-new-buffer 'always)
+
+;; Set up SBCL as the lisp to use
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+
+;; set up matching brackets/parens
+;; highlight brackets
+(setq show-paren-style 'parenthesis)
+
+;; highlight entire expression
+(setq show-paren-style 'expression)
+
+;; highlight brackets if visible, else entire expression
+(setq show-paren-style 'mixed)
+
+;; turn it on
+(show-paren-mode 1)
+
+
+;; Add connection to ClickUp API
+(load-file "~/elisp/clickupconnect.el")
+
+;; Add PV Comm functions
+(load-file "~/elisp/pvfunctions.el")
+;; Use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
+;; Use electric pair
+(electric-pair-mode 1)
+
+
+;; For org-reveal
+(require 'ox-reveal)
+(setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
+
+;; Follow symbolic links
+(setq vc-follow-symlinks t)
+
+;; RestClient
+(require 'restclient)
+
+;; Set up tramp mode
+
+(setq tramp-default-method "ssh")
+
 ;; set up backup files
 (setq backup-directory-alist `(("." . "~/.saves")))
 
-(projectile-global-mode)
-(require 'ido)
-(ido-mode t)
 (defun set-tab-width (width)
   (interactive "nSet tab width: ")
   (setq tab-width width))
@@ -47,15 +81,6 @@
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
-
-;; set up pocket
-;; (el-pocket-load-auth)
-(global-set-key "\C-cf" 'twittering-favorite)
-
-;; set file extensions
-(add-to-list 'auto-mode-alist '("\\.ctp\\'" . php-mode))
-
-;; Stop with dialog boxes
 
 ;; set up jump mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
@@ -74,13 +99,6 @@
 ;; set up executable files
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
-;; set up emms
-(add-to-list 'load-path "~/elisp/emms/")
-(require 'emms-setup)
-(emms-standard)
-(emms-default-players)
-(require 'emms-streams)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -88,9 +106,11 @@
  ;; If there is more than one, they won't work right.
  '(ac-use-fuzzy t)
  '(ag-executable "/usr/local/bin/ag")
+ '(calendar-latitude 40.8687)
+ '(calendar-longitude 82.3182)
  '(custom-safe-themes
-	(quote
-	 ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f1ee3126c1aba9f3ba35bb6f17cb2190557f2223646fd6796a1eb30a9d93e850" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "11636897679ca534f0dec6f5e3cb12f28bf217a527755f6b9e744bd240ed47e1" default)))
  '(custom-theme-load-path nil t)
  '(diary-file "~/Dropbox/orgfiles/diary")
  '(ember-completion-system (quote helm))
@@ -98,6 +118,8 @@
  '(emms-player-mplayer-command-name "tsocks mplayer")
  '(emms-player-mplayer-playlist-command-name "tsocks mplayer")
  '(epg-gpg-program "/usr/local/bin/gpg")
+ '(forecast-api-key "6dac81aeb952652e8b578ece2721fbd2")
+ '(forecast-api-url "https://api.darksky.net")
  '(geeknote-command "/usr/local/bin/geeknote")
  '(haml-indent-offset 3)
  '(ido-use-faces nil)
@@ -110,23 +132,25 @@
  '(minitest-use-zeus-when-possible t)
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
-	(quote
-	 ("~/Dropbox/orgfiles/personal/Research.org" "~/Dropbox/orgfiles/personal/ShoppingLists.org" "~/Dropbox/orgfiles/pvcomm/DefaultAPIDesign.org" "~/Dropbox/orgfiles/distractions.org" "/Users/sergio/Dropbox/orgfiles/inbox.org" "~/Dropbox/orgfiles/CurrentTasks.org")))
+   (quote
+    ("~/Dropbox/orgfiles/pvcomm/LatexTerms.org" "~/Dropbox/orgfiles/journal/20200127" "~/Dropbox/orgfiles/OEC/OEC-Index.org" "~/Dropbox/orgfiles/pvcomm/PVCommIndex.org" "~/Dropbox/orgfiles/HomeAssistantNotes.org" "~/Dropbox/orgfiles/six_degrees_of_ohio/website_tasks.org")))
  '(org-confirm-babel-evaluate nil)
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-export-with-author nil)
  '(org-journal-dir "~/Dropbox/orgfiles/journal/")
+ '(org-journal-file-type (quote daily))
  '(org-md-headline-style (quote setext))
  '(org-mobile-inbox-for-pull "~/Dropbox/orgfiles/CurrentTasks.org")
  '(org-refile-targets
-	(quote
-	 ((org-agenda-files :maxlevel . 9)
-	  (nil :maxlevel . 9))))
+   (quote
+    ((org-agenda-files :maxlevel . 9)
+     (nil :maxlevel . 9))))
  '(org-startup-indented t)
+ '(org-use-property-inheritance t)
  '(package-selected-packages
-	(quote
-	 (helm-company csharp-mode org-bullets ox-reveal org-re-reveal magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+   (quote
+    (pinboard pinboard-api pinboard-popular helm-spotify-plus yaml-tomato yaml-mode request graphql graphql-mode csv csv-mode elisp-slime-nav ac-slime helm-slime slime slime-company auctex company-auctex company-restclient ob-restclient restclient restclient-helm pdf-tools helm-company csharp-mode org-bullets ox-reveal org-re-reveal magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -135,13 +159,13 @@
  '(rspec-use-rvm t)
  '(rspec-use-spring-when-possible t)
  '(ruby-test-rspec-options (quote ("-b -erb")))
+ '(send-mail-function (quote mailclient-send-it))
  '(setq org-default-notes-file t)
  '(url-cookie-file "/Users/sergio/.emacs.d/url/cookies")
  '(url-history-file "/Users/sergio/.emacs.d/url/history")
  '(use-dialog-box nil)
  '(use-file-dialog nil))
 
-(require 'rvm)
 
 ;; ansi color
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -152,15 +176,22 @@
 
 (global-set-key (kbd "C-x b") 'helm-mini)
 (setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match    t)
+      helm-recentf-fuzzy-match t)
 
 (global-set-key (kbd "C-c h i") 'helm-semantic-or-imenu)
 (setq helm-semantic-fuzzy-match t
-      helm-imenu-fuzzy-match    t)
+      helm-imenu-fuzzy-match t)
 
 (setq global-ace-isearch-mode t)
-;; Set up org mode
 
+;; try out company mode for completion
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; Set up org mode
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
@@ -198,9 +229,6 @@
 
 (add-hook 'org-mode-hook 'soft-wrap-lines)
 
-;; Set up mobile org
-(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg/")
-
 (require 'org-journal)
 (setq org-journal-dir "~/Dropbox/orgfiles/journal/")
 (setq org-agenda-files (quote ("~/Dropbox/orgfiles")))
@@ -211,14 +239,9 @@
 (add-hook 'ruby-mode-hook 'linum-mode)
 (add-hook 'enh-ruby-mode-hook 'linum-mode)
 (add-hook 'php-mode 'linum-mode)
-;; try out company mode for completion
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
-(add-hook 'after-init-hook 'global-company-mode)
 
-;windmore
+
+;windmove
 (require 'windmove)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
@@ -232,18 +255,10 @@
 ;; magit status
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; set up flx-ido
-(require 'flx-ido)
-(ido-mode 1)
-(ido-everywhere 1)
-(flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
-
 ;; turn off menu bar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+
 ;; set up line numbers on for source code files
 (add-hook 'abg-code-modes-hook
           (lambda () (linum-mode 1))
@@ -269,11 +284,6 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 (projectile-rails-global-mode)
 
-;; set up rails mode
-(global-set-key (kbd "C-c C-v")  'projectile-rails-find-view)
-(global-set-key (kbd "C-c C-m")  'projectile-rails-find-model)
-(global-set-key (kbd "C-c C-c")  'projectile-rails-find-controller)
-
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
 (defadvice switch-to-buffer (before save-buffer-now activate)
@@ -291,6 +301,7 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; set up comment/uncomment line or section..
 (defun comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
   (interactive)
@@ -300,8 +311,10 @@
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)
     (next-line)))
-
+;; set up keys for comment/uncomment
 (global-set-key (kbd "C-;")  'comment-or-uncomment-region-or-line)
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -331,24 +344,12 @@
 
 	 (getenv "PATH")))
 
-;; fixes the problem with the meta key in the command line
+; run pdflatex to get a pdf instead of dvi
+(setq latex-run-command "pdflatex")
 
+;; fixes the problem with the meta key in the command line
 (set-keyboard-coding-system nil)
 (put 'narrow-to-defun 'disabled nil)
-
-;; add yasnippet
-(setq yas-snippet-dirs
-      '("~/.emacs.d/yasnippet-snippets"))
-(require 'yasnippet)
-(yas-global-mode 1)
-
-;; emmet mode
-(require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-
-;; set tab width
-(setq-default tab-width 3)
 
 ;; add markdown export to org
 (eval-after-load "org"
@@ -356,3 +357,7 @@
 
 ;; load emacs grammarly
 (load-file "/Users/sergio/.emacs.d/plugins/emacs-grammarly/emacs-grammarly.el")
+
+;; Set up auctex
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
