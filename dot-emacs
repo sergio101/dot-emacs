@@ -23,6 +23,10 @@
 (setq ido-use-filename-at-point 'guess)
 (setq ido-create-new-buffer 'always)
 
+;; Set up re-builder
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
 ;; Set up SBCL as the lisp to use
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
@@ -45,6 +49,10 @@
 
 ;; Add PV Comm functions
 (load-file "~/elisp/pvfunctions.el")
+
+;; Add SDOH functions
+(load-file "~/elisp/sdohfunctions.el")
+
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
@@ -133,11 +141,17 @@
  '(org-agenda-file-regexp "\\\\`[^.].*\\\\.org'\\\\|[0-9]+")
  '(org-agenda-files
    (quote
-    ("~/Dropbox/orgfiles/pvcomm/LatexTerms.org" "~/Dropbox/orgfiles/journal/20200127" "~/Dropbox/orgfiles/OEC/OEC-Index.org" "~/Dropbox/orgfiles/pvcomm/PVCommIndex.org" "~/Dropbox/orgfiles/HomeAssistantNotes.org" "~/Dropbox/orgfiles/six_degrees_of_ohio/website_tasks.org")))
+    ("~/Dropbox/orgfiles/pvcomm/QppConnectGamePlan.org" "~/Dropbox/orgfiles/ExileOnGrantStreet/ProjectOverview.org" "~/Dropbox/orgfiles/pvcomm/PricePages.org" "~/Dropbox/orgfiles/pvcomm/MyInvoices.org" "~/Dropbox/orgfiles/pvcomm/ClopaySSO.org" "~/Dropbox/orgfiles/CurrentTasks.org" "~/Dropbox/orgfiles/MidwestReport/MidewestReport.org" "~/Dropbox/orgfiles/OEC/OEC-Index.org" "~/Dropbox/orgfiles/pvcomm/PVCommIndex.org" "~/Dropbox/orgfiles/HomeAssistantNotes.org" "~/Dropbox/orgfiles/six_degrees_of_ohio/website_tasks.org")))
+ '(org-capture-templates
+   (quote
+    (("t" "Todo" entry
+      (file+headline "CurrentTasks.org" "Current Tasks")
+      "* TODO %?  %i\\n  %a"))) t)
  '(org-confirm-babel-evaluate nil)
  '(org-default-notes-file "~/Dropbox/orgfiles/inbox.org")
  '(org-directory "~/Dropbox/orgfiles/")
  '(org-export-with-author nil)
+ '(org-journal-carryover-items "-TODO=\"TODO\"")
  '(org-journal-dir "~/Dropbox/orgfiles/journal/")
  '(org-journal-file-type (quote daily))
  '(org-md-headline-style (quote setext))
@@ -150,7 +164,8 @@
  '(org-use-property-inheritance t)
  '(package-selected-packages
    (quote
-    (pinboard pinboard-api pinboard-popular helm-spotify-plus yaml-tomato yaml-mode request graphql graphql-mode csv csv-mode elisp-slime-nav ac-slime helm-slime slime slime-company auctex company-auctex company-restclient ob-restclient restclient restclient-helm pdf-tools helm-company csharp-mode org-bullets ox-reveal org-re-reveal magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet org-journal flymake-ruby flx-ido emms ace-isearch)))
+    (ob-elixir sunshine 2048-game m-buffer smog pinboard pinboard-api pinboard-popular helm-spotify-plus yaml-tomato yaml-mode request graphql graphql-mode csv csv-mode elisp-slime-nav ac-slime helm-slime slime slime-company auctex company-auctex company-restclient ob-restclient restclient restclient-helm pdf-tools helm-company csharp-mode org-bullets ox-reveal org-re-reveal magit-org-todos magit-todos pandoc-mode hackernews stripe-buffer zenburn-theme s3ed mastodon alchemist elixir-mode pillar flycheck arduino-mode org-pomodoro netrunner org-gcal calfw calfw-ical wttrin forecast ## epl f flx flymake-easy git-commit helm helm-core helm-swoop inf-ruby inflections json-reformat package-build pkg-info popup projectile rake s shut-up with-editor minitest php+-mode flymake-json json-mode json-snatcher ac-emmet emmet-mode helm-emmet ruby-refactor handlebars-mode twittering-mode heroku coffee-mode hyperbole web-mode web-server yasnippet haml-mode ag helm-ag pov-mode company helm-rails magit magit-filenotify magit-popup magit-rockstar rvm projectile-rails pallet flymake-ruby flx-ido emms ace-isearch)))
+ '(pinboard-api-token sergio_101:32CCFAA9ED77DCDA4AE3)
  '(rspec-command-options "--format documentation --drb")
  '(rspec-rake-command "rake")
  '(rspec-spec-command "rspec")
@@ -195,10 +210,15 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+;; Set up org mode task sequence
+(setq org-todo-keywords
+      '((sequence "TODO" "ACTIVE" "HOLD"  "|" "DONE" "DELEGATED" "CANCELED")))
+
+
 ;; set up languages on open
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((ruby . t)(python . t)(shell . t)))
+ '((ruby . t)(python . t)(shell . t)(elixir . t)))
 
 (setq org-directory "~/Dropbox/orgfiles/")
 (setq org-default-notes-file (concat org-directory "/CurrentTasks.org"))
@@ -211,21 +231,19 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 
-(setq org-log-done 'time)
-
 (setq org-capture-templates
-      (` (("t" "todo" entry (file+headline ,(concat org-directory "/inbox.org") "Tasks")
-               "* TODO %?\n %U\n %a\n" )
-              ("n" "note" entry (file (concat org-directory "/inbox.org"))
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-              )))
+      '(("t" "Todo" entry (file+headline "~/Dropbox/orgfiles/CurrentTasks.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/Dropbox/orgfiles/CurrentTasks.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
+(setq org-log-done 'time)
 
 (defun soft-wrap-lines ()
   "Make lines wrap at window edge and on word boundary, in current buffer."
   (interactive)
   (setq truncate-lines nil)
-  (setq word-wrap t)
-  )
+  (setq word-wrap t))
 
 (add-hook 'org-mode-hook 'soft-wrap-lines)
 
